@@ -137,6 +137,21 @@
       "is_enabled": true
     },
     {
+      "skill_id": "skill-creator",
+      "name": {
+        "en": "Skill Creator",
+        "zh": "技能创建器"
+      },
+      "description": {
+        "en": "Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Claude's capabilities with specialized knowledge, workflows, or tool integrations.",
+        "zh": "创建有效技能的指南。当用户想要创建一个新技能（或更新现有技能）以通过专业知识、工作流程或工具集成来扩展 Claude 的功能时，应使用此技能。"
+      },
+      "categories": ["development", "skills", "authoring"],
+      "tags": ["开发", "技能"],
+      "skill_md_path": "skill-creator/SKILL.md",
+      "is_enabled": true
+    },
+    {
       "skill_id": "visual-design-foundations",
       "name": {
         "en": "Visual Design Foundations",
