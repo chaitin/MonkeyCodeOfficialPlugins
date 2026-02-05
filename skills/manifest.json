@@ -1,0 +1,155 @@
+{
+  "$schema": "../.schema/skills_manifest.json",
+  "skills": [
+    {
+      "skill_id": "brainstorming",
+      "name": {
+        "en": "Brainstorming Ideas Into Designs",
+        "zh": "创意设计头脑风暴"
+      },
+      "description": {
+        "en": "You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior. Explores user intent, requirements and design before implementation.",
+        "zh": "在任何创意工作之前必须使用 - 创建功能、构建组件、添加功能或修改行为。在实施之前探索用户意图、需求和设计。"
+      },
+      "categories": ["design", "planning", "ideation"],
+      "tags": ["brainstorming", "design", "planning", "requirements", "collaboration"],
+      "skill_md_path": "brainstorming/SKILL.md",
+      "is_enabled": true
+    },
+    {
+      "skill_id": "design-system-patterns",
+      "name": {
+        "en": "Design System Patterns",
+        "zh": "设计系统模式"
+      },
+      "description": {
+        "en": "Build scalable design systems with design tokens, theming infrastructure, and component architecture patterns. Use when creating design tokens, implementing theme switching, building component libraries, or establishing design system foundations.",
+        "zh": "使用设计令牌、主题基础设施和组件架构模式构建可扩展的设计系统。用于创建设计令牌、实现主题切换、构建组件库或建立设计系统基础。"
+      },
+      "categories": ["design-systems", "tokens", "theming", "components"],
+      "tags": ["design-systems", "design-tokens", "theming", "css", "tailwind", "component-library"],
+      "skill_md_path": "design-system-patterns/SKILL.md",
+      "is_enabled": true
+    },
+    {
+      "skill_id": "golang-code-review",
+      "name": {
+        "en": "Golang Code Review",
+        "zh": "Go 代码审查"
+      },
+      "description": {
+        "en": "Comprehensive Go code review skill for PR reviews, architecture assessment, and test quality analysis. Use when reviewing Go code to ensure adherence to Go best practices, security standards, and project-specific patterns.",
+        "zh": "用于 PR 审查、架构评估和测试质量分析的全面 Go 代码审查技能。审查 Go 代码时使用，以确保符合 Go 最佳实践、安全标准和项目特定模式。"
+      },
+      "categories": ["code-review", "golang", "testing", "security"],
+      "tags": ["code-review", "go", "golang", "architecture", "testing", "security"],
+      "skill_md_path": "golang-code-review/SKILL.md",
+      "is_enabled": true
+    },
+    {
+      "skill_id": "golang-patterns",
+      "name": {
+        "en": "Go Development Patterns",
+        "zh": "Go 开发模式"
+      },
+      "description": {
+        "en": "Idiomatic Go patterns, best practices, and conventions for building robust, efficient, and maintainable Go applications.",
+        "zh": "用于构建健壮、高效和可维护 Go 应用程序的惯用 Go 模式、最佳实践和约定。"
+      },
+      "categories": ["golang", "patterns", "best-practices"],
+      "tags": ["go", "golang", "idiomatic", "best-practices", "concurrency", "testing"],
+      "skill_md_path": "golang-patterns/SKILL.md",
+      "is_enabled": true
+    },
+    {
+      "skill_id": "golang-testing",
+      "name": {
+        "en": "Go Testing Patterns",
+        "zh": "Go 测试模式"
+      },
+      "description": {
+        "en": "Go testing patterns including table-driven tests, subtests, benchmarks, fuzzing, and test coverage. Follows TDD methodology with idiomatic Go practices.",
+        "zh": "包括表驱动测试、子测试、基准测试、模糊测试和测试覆盖率的 Go 测试模式。遵循 TDD 方法和惯用的 Go 实践。"
+      },
+      "categories": ["golang", "testing", "tdd", "benchmarks"],
+      "tags": ["go", "golang", "testing", "tdd", "benchmarks", "fuzzing", "table-driven-tests"],
+      "skill_md_path": "golang-testing/SKILL.md",
+      "is_enabled": true
+    },
+    {
+      "skill_id": "fix",
+      "name": {
+        "en": "Fix Lint and Formatting",
+        "zh": "修复代码检查和格式化"
+      },
+      "description": {
+        "en": "Use when you have lint errors, formatting issues, or before committing code to ensure it passes CI.",
+        "zh": "当您有代码检查错误、格式化问题或在提交代码之前使用，以确保它通过 CI。"
+      },
+      "categories": ["linting", "formatting", "ci"],
+      "tags": ["lint", "formatting", "prettier", "ci", "code-quality"],
+      "skill_md_path": "react-code-fix-linter/SKILL.md",
+      "is_enabled": true
+    },
+    {
+      "skill_id": "react-native-design",
+      "name": {
+        "en": "React Native Design",
+        "zh": "React Native 设计"
+      },
+      "description": {
+        "en": "Master React Native styling, navigation, and Reanimated animations for cross-platform mobile development. Use when building React Native apps, implementing navigation patterns, or creating performant animations.",
+        "zh": "掌握 React Native 样式、导航和 Reanimated 动画，用于跨平台移动开发。构建 React Native 应用、实现导航模式或创建高性能动画时使用。"
+      },
+      "categories": ["react-native", "mobile", "styling", "navigation", "animation"],
+      "tags": ["react-native", "mobile", "styling", "navigation", "reanimated", "gestures", "typescript"],
+      "skill_md_path": "react-native-ui-animation/SKILL.md",
+      "is_enabled": true
+    },
+    {
+      "skill_id": "security-review",
+      "name": {
+        "en": "Security Review Skill",
+        "zh": "安全审查技能"
+      },
+      "description": {
+        "en": "Use this skill when adding authentication, handling user input, working with secrets, creating API endpoints, or implementing payment/sensitive features. Provides comprehensive security checklist and patterns.",
+        "zh": "在添加身份验证、处理用户输入、使用密钥、创建 API 端点或实现支付/敏感功能时使用此技能。提供全面的安全检查清单和模式。"
+      },
+      "categories": ["security", "authentication", "api", "vulnerabilities"],
+      "tags": ["security", "authentication", "authorization", "sql-injection", "xss", "csrf", "rate-limiting", "owasp"],
+      "skill_md_path": "security-review-audit/SKILL.md",
+      "is_enabled": true
+    },
+    {
+      "skill_id": "web-component-design",
+      "name": {
+        "en": "Web Component Design",
+        "zh": "Web 组件设计"
+      },
+      "description": {
+        "en": "Master React, Vue, and Svelte component patterns including CSS-in-JS, composition strategies, and reusable component architecture. Use when building UI component libraries, designing component APIs, or implementing frontend design systems.",
+        "zh": "掌握 React、Vue 和 Svelte 组件模式，包括 CSS-in-JS、组合策略和可重用的组件架构。构建 UI 组件库、设计组件 API 或实现前端设计系统时使用。"
+      },
+      "categories": ["components", "react", "vue", "svelte", "css-in-js"],
+      "tags": ["components", "react", "vue", "svelte", "css-in-js", "tailwind", "styled-components", "composition"],
+      "skill_md_path": "web-component-design-architecture/SKILL.md",
+      "is_enabled": true
+    },
+    {
+      "skill_id": "visual-design-foundations",
+      "name": {
+        "en": "Visual Design Foundations",
+        "zh": "视觉设计基础"
+      },
+      "description": {
+        "en": "Apply typography, color theory, spacing systems, and iconography principles to create cohesive visual designs. Use when establishing design tokens, building style guides, or improving visual hierarchy and consistency.",
+        "zh": "应用排版、色彩理论、间距系统和图标设计原则来创建协调的视觉设计。建立设计令牌、构建样式指南或改善视觉层次和一致性时使用。"
+      },
+      "categories": ["design", "visual-design", "typography", "color", "spacing"],
+      "tags": ["design", "visual-design", "typography", "color", "spacing", "icons", "accessibility", "wcag"],
+      "skill_md_path": "visual-design-foundations/SKILL.md",
+      "is_enabled": true
+    }
+  ]
+}

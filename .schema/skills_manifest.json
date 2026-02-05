@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://monkeycode.ai.com/schemas/skills_manifest.json",
+  "title": "Skills",
+  "description": "A manifest of available AI skills with their metadata",
+  "type": "object",
+  "properties": {
+    "skills": {
+      "type": "array",
+      "description": "List of available skills",
+      "items": {
+        "$ref": "#/definitions/AgentSkill"
+      }
+    }
+  },
+  "required": ["skills"],
+  "definitions": {
+    "AgentSkill": {
+      "type": "object",
+      "required": [
+        "skill_id",
+        "name",
+        "skill_md_path",
+        "is_enabled"
+      ],
+      "properties": {
+        "skill_id": {
+          "type": "string",
+          "description": "Unique identifier for the skill",
+          "minLength": 1
+        },
+        "name": {
+          "type": "object",
+          "description": "Human-readable name of the skill with i18n support",
+          "additionalProperties": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "categories": {
+          "type": "array",
+          "description": "Categories the skill belongs to",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "type": "object",
+          "description": "Short description of what the skill does with i18n support",
+          "additionalProperties": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "tags": {
+          "type": "array",
+          "description": "Tags for the skill",
+          "items": {
+            "type": "string"
+          }
+        },
+        "args_schema": {
+          "type": "object",
+          "description": "Schema for skill arguments",
+          "additionalProperties": true
+        },
+        "skill_md_path": {
+          "type": "string",
+          "description": "Relative path to the skill markdown file",
+          "minLength": 1
+        },
+        "is_enabled": {
+          "type": "boolean",
+          "description": "Whether the skill is enabled"
+        }
+      }
+    }
+  }
+}
