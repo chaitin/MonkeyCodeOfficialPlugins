@@ -180,6 +180,21 @@
       "tags": ["前端", "开发"],
       "skill_md_path": "frontend-project-creator/SKILL.md",
       "is_enabled": true
+    },
+    {
+      "skill_id": "ui-ux-pro-max",
+      "name": {
+        "en": "UI/UX Pro Max - Design Intelligence",
+        "zh": "UI/UX 专业版 - 设计智能"
+      },
+      "description": {
+        "en": "Searchable database of UI styles, color palettes, font pairings, chart types, product recommendations, UX guidelines, and stack-specific best practices. Supports React, Next.js, Vue, Svelte, SwiftUI, React Native, Flutter, Tailwind, and shadcn/ui. Use when building frontend pages, landing pages, dashboards, admin panels, e-commerce sites, SaaS apps, portfolios, blogs, or mobile apps.",
+        "zh": "可搜索的 UI 风格、调色板、字体配对、图表类型、产品推荐、UX 指南和特定技术栈最佳实践数据库。支持 React、Next.js、Vue、Svelte、SwiftUI、React Native、Flutter、Tailwind 和 shadcn/ui。用于构建前端页面、落地页、仪表板、管理面板、电商网站、SaaS 应用、作品集、博客或移动应用时使用。"
+      },
+      "categories": ["ui", "ux", "design", "frontend", "mobile", "web"],
+      "tags": ["前端", "设计", "UI", "UX"],
+      "skill_md_path": "ui-ux-pro-max/SKILL.md",
+      "is_enabled": true
     }
   ]
 }
