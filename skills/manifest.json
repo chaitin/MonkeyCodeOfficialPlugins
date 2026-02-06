@@ -225,6 +225,21 @@
       "tags": ["文档", "wiki", "分析"],
       "skill_md_path": "project-wiki/SKILL.md",
       "is_enabled": true
+    },
+    {
+      "skill_id": "mui-helper",
+      "name": {
+        "en": "MUI Helper",
+        "zh": "MUI 辅助"
+      },
+      "description": {
+        "en": "MUI (Material-UI) component library usage guide and documentation. Automatically triggers when using MUI components: (1) creating/modifying Material-UI UI components, (2) solving MUI implementation issues, (3) querying MUI component properties and APIs, (4) implementing MUI layouts and theming, (5) migrating between MUI versions or customizing component behavior.",
+        "zh": "MUI (Material-UI) 组件库使用指南和参考文档。在需要使用 MUI 组件开发 UI 时自动触发：(1) 创建或修改使用 Material-UI 的 UI 组件，(2) 解决 MUI 组件实现问题，(3) 查询 MUI 组件属性和 API，(4) 实现 MUI 布局和主题定制，(5) 在 MUI 版本间迁移或自定义组件行为。"
+      },
+      "categories": ["mui", "material-ui", "react", "components"],
+      "tags": ["前端", "MUI", "UI", "React"],
+      "skill_md_path": "mui-helper/SKILL.md",
+      "is_enabled": true
     }
   ]
 }
