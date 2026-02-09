@@ -240,6 +240,21 @@
       "tags": ["前端", "开发", "组件库", "UI"],
       "skill_md_path": "mui-helper/SKILL.md",
       "is_enabled": true
+    },
+    {
+      "skill_id": "shadcnui-helper",
+      "name": {
+        "en": "shadcn/ui Helper",
+        "zh": "shadcn/ui 组件库助手"
+      },
+      "description": {
+        "en": "Guide for installing, configuring, theming, and troubleshooting shadcn/ui in React/Next.js/Vite/Remix projects. Triggers when initializing the CLI, consulting component APIs, tuning themes/tokens/dark mode, or resolving Radix/Tailwind integration issues.",
+        "zh": "shadcn/ui 组件库的安装、配置、主题定制与排障指南。适用于在 React/Next.js/Vite/Remix 项目中初始化 CLI、查阅组件 API、调整主题/令牌/暗色模式或排查 Radix 与 Tailwind 集成问题时。"
+      },
+      "categories": ["frontend", "components", "design-systems"],
+      "tags": ["前端", "开发", "组件库", "UI"],
+      "skill_md_path": "shadcnui-helper/SKILL.md",
+      "is_enabled": true
     }
   ]
 }
