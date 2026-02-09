@@ -20,11 +20,7 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 要查找 Tailwind CSS 文档：
 
 1. **确定主题** - 确定你需要什么 CSS 属性或功能（例如：`flex-direction`、`font-weight`、`background-color`）
-
-2. **找到相关文件** - 在 `references/` 目录中搜索对应的参考文件
-   - 文件命名为 `docs-<属性名>.md`
-   - 例如：对于 `flex-direction`，查找 `docs-flex-direction.md`
-
+2. **找到相关文件** - 在 [文档目录索引] 中找到对应的参考文件
 3. **阅读文档** - 每个文件包含：
    - 基本用法示例
    - 响应式变体
@@ -32,17 +28,25 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
    - 状态变体（hover、focus、dark mode）
    - 最佳实践
 
-## 参考文档
+## 必须先看文档
+
+1. **确定需求** - 明确你需要什么组件或功能（例如：按钮、模态框、表单验证）
+2. **查阅文档分类** - 在下方的「文档目录索引」中找到对应类别的文档
+3. **定位具体文件** - 根据分类中的文件名，在 `references/` 目录中找到对应文档
+4. **阅读文档内容** - 使用 `read` 工具查看完整文档，理解后再实现
+5. **参考示例代码** - 文档中包含完整的 HTML/CSS/JavaScript 示例
+
+## 文档目录索引
 
 `references/` 目录包含 203 个涵盖所有 Tailwind CSS 功能的文档文件。
 
-### ./docs-accent-color.md
+### ./references/docs-accent-color.md
 
 - Apply Responsive Accent Color with Breakpoint Variant
 - Use Custom Theme Color in Markup
 - Customize Theme Colors with CSS Variables
 
-### ./docs-adding-custom-styles.md
+### ./references/docs-adding-custom-styles.md
 
 - Apply Arbitrary Values with Responsive Modifiers in Tailwind CSS HTML
 - Use Simple Custom Utilities in HTML (HTML)
@@ -61,7 +65,7 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Apply Arbitrary Values for Direct Styling in Tailwind CSS HTML
 - Support Negative Values in Tailwind CSS Utilities
 
-### ./docs-align-content.md
+### ./references/docs-align-content.md
 
 - Align rows to the start of the cross axis using Tailwind CSS
 - Apply responsive align-content utilities in Tailwind CSS
@@ -72,7 +76,7 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Align rows to the end of the cross axis using Tailwind CSS
 - Reset row alignment to normal using Tailwind CSS
 
-### ./docs-align-items.md
+### ./references/docs-align-items.md
 
 - Apply responsive align-items utilities in Tailwind CSS HTML
 - Align items to the cross-start with items-start in HTML
@@ -80,12 +84,12 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Apply items-stretch for cross-axis stretching in HTML
 - Align items by text baseline with items-baseline in HTML
 
-### ./docs-align-self.md
+### ./references/docs-align-self.md
 
 - Aligning Flex/Grid Item to Start of Cross Axis (self-start) in HTML
 - Applying Responsive align-self Utilities in Tailwind CSS (HTML)
 
-### ./docs-animation.md
+### ./references/docs-animation.md
 
 - Responsive Animation with Breakpoint Variants
 - Customize Animation Theme with CSS Variables
@@ -93,12 +97,12 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Custom Animation with Arbitrary Values
 - Custom Animation with CSS Variables
 
-### ./docs-appearance.md
+### ./references/docs-appearance.md
 
 - Apply Tailwind CSS `appearance` Utilities Responsively
 - Remove Default Browser Styling with Tailwind CSS `appearance-none`
 
-### ./docs-aspect-ratio.md
+### ./references/docs-aspect-ratio.md
 
 - Apply responsive aspect ratios using Tailwind CSS variants
 - Use a custom aspect ratio utility defined in Tailwind CSS theme
@@ -108,94 +112,94 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Apply a specific aspect ratio to an element using Tailwind CSS
 - Apply a 16:9 video aspect ratio to an iframe using Tailwind CSS
 
-### ./docs-backdrop-filter.md
+### ./references/docs-backdrop-filter.md
 
 - Apply Basic Backdrop Filters with Tailwind CSS
 - Remove Backdrop Filters with Tailwind CSS
 
-### ./docs-backdrop-filter-brightness.md
+### ./references/docs-backdrop-filter-brightness.md
 
 - Apply Responsive Backdrop Brightness Filters in HTML with Tailwind CSS
 
-### ./docs-backdrop-filter-contrast.md
+### ./references/docs-backdrop-filter-contrast.md
 
 - Apply responsive backdrop contrast with Tailwind CSS breakpoints
 - Set custom backdrop contrast value with bracket notation
 
-### ./docs-backdrop-filter-grayscale.md
+### ./references/docs-backdrop-filter-grayscale.md
 
 - Apply responsive backdrop grayscale with Tailwind CSS
 - Apply basic backdrop grayscale utilities in Tailwind CSS
 - Set custom backdrop grayscale value with Tailwind CSS
 
-### ./docs-backdrop-filter-invert.md
+### ./references/docs-backdrop-filter-invert.md
 
 - Apply Basic Backdrop Invert Filters with Tailwind CSS
 - Apply Backdrop Invert with CSS Variable in Tailwind CSS
 - Apply Responsive Backdrop Invert Filters with Tailwind CSS
 
-### ./docs-backdrop-filter-opacity.md
+### ./references/docs-backdrop-filter-opacity.md
 
 - Apply Responsive Backdrop Opacity with Tailwind CSS
 - Apply Basic Backdrop Opacity Filters with Tailwind CSS
 
-### ./docs-backdrop-filter-saturate.md
+### ./references/docs-backdrop-filter-saturate.md
 
 - Apply backdrop saturation with Tailwind CSS utilities
 - Reference CSS custom properties for backdrop saturation
 
-### ./docs-backdrop-filter-sepia.md
+### ./references/docs-backdrop-filter-sepia.md
 
 - Apply responsive backdrop sepia with breakpoint variants
 - Apply backdrop sepia filter with Tailwind CSS utility classes
 - Apply custom backdrop sepia value with arbitrary syntax
 
-### ./docs-backface-visibility.md
+### ./references/docs-backface-visibility.md
 
 - Apply Responsive backface-visibility Utility in HTML
 - Apply backface-visibility Utilities in HTML
 
-### ./docs-background-attachment.md
+### ./references/docs-background-attachment.md
 
 - Responsive background-attachment with breakpoint variants
 
-### ./docs-background-blend-mode.md
+### ./references/docs-background-blend-mode.md
 
 - Responsive background blend mode with Tailwind CSS breakpoints
 
-### ./docs-background-clip.md
+### ./references/docs-background-clip.md
 
 - Apply responsive background-clip utilities in HTML (Tailwind CSS)
 - Apply basic background-clip utilities in HTML (Tailwind CSS)
 - Crop background to text shape in HTML (Tailwind CSS)
 
-### ./docs-background-color.md
+### ./references/docs-background-color.md
 
 - Map Tailwind `bg-*` Classes to CSS Background Colors
 - Apply Responsive Background Color using Tailwind CSS Breakpoint Variants
 
-### ./docs-background-image.md
+### ./references/docs-background-image.md
 
 - Apply Responsive Gradient Utilities with Breakpoint Variants
 - Create Conic Gradient Backgrounds with Tailwind CSS
 - Create Radial Gradient Backgrounds with Tailwind CSS
 - Create Linear Gradient Backgrounds with Tailwind CSS
 
-### ./docs-background-origin.md
+### ./references/docs-background-origin.md
 
 - Responsive background-origin with breakpoint variants
 
-### ./docs-background-position.md
+### ./references/docs-background-position.md
 
 - Apply Tailwind CSS background-position utilities for basic positioning
 - Apply background-position using CSS variables in Tailwind CSS
 - Apply responsive background-position utilities in Tailwind CSS
 
-### ./docs-background-repeat.md
+### ./references/docs-background-repeat.md
 
 - Responsive background-repeat with Tailwind CSS breakpoints
 
-### ./docs-background-size.md
+### ./references/docs-background-size.md
 
 - Apply custom `background-size` value in Tailwind CSS
 - Apply responsive `background-size` utilities in Tailwind CSS
@@ -204,7 +208,7 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Apply `bg-auto` for default background image size in Tailwind CSS
 - Apply `bg-contain` for background image fill without cropping in Tailwind CSS
 
-### ./docs-border-color.md
+### ./references/docs-border-color.md
 
 - Basic Border Color Example - HTML
 - Apply Amber 400 Border Start Color with Tailwind CSS
@@ -237,22 +241,22 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Set Border Block Color with Tailwind CSS Utilities
 - Apply Border Inline Color with Tailwind CSS and CSS
 
-### ./docs-border-radius.md
+### ./references/docs-border-radius.md
 
 - Apply directional border radius (start) with Tailwind CSS
 
-### ./docs-border-spacing.md
+### ./references/docs-border-spacing.md
 
 - Use CSS Custom Property for Border Spacing in HTML with Tailwind CSS
 - Apply Basic Border Spacing to HTML Tables with Tailwind CSS
 - Customize Tailwind CSS Spacing Theme Variable for Border Spacing
 - Apply Responsive Border Spacing in HTML with Tailwind CSS
 
-### ./docs-border-style.md
+### ./references/docs-border-style.md
 
 - Apply responsive border styles with breakpoint variants
 
-### ./docs-border-width.md
+### ./references/docs-border-width.md
 
 - Apply responsive border width with breakpoint variants
 - Set custom border width with bracket notation
@@ -260,12 +264,12 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Logical property border-width utilities in Tailwind CSS
 - Reverse divide direction for reversed flex layouts
 
-### ./docs-box-decoration-break.md
+### ./references/docs-box-decoration-break.md
 
 - Responsive box-decoration-break with breakpoint variant
 - Apply box-decoration-clone utility in HTML
 
-### ./docs-box-shadow.md
+### ./references/docs-box-shadow.md
 
 - Apply Different Sized Box Shadows in HTML with Tailwind CSS
 - Apply Responsive Box Shadows in Tailwind CSS
@@ -273,56 +277,56 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Apply Custom Box Shadow Values in Tailwind CSS
 - Define Inset Ring Colors with Tailwind CSS Variables
 
-### ./docs-box-sizing.md
+### ./references/docs-box-sizing.md
 
 - Apply responsive box-sizing with Tailwind CSS breakpoint variants
 - Apply box-content utility in HTML with Tailwind CSS
 - Apply box-border utility in HTML with Tailwind CSS
 
-### ./docs-break-after.md
+### ./references/docs-break-after.md
 
 - break-after Basic Example with Columns
 - break-after Responsive Design with Breakpoint Variant
 
-### ./docs-break-before.md
+### ./references/docs-break-before.md
 
 - Control Column/Page Breaks with Tailwind CSS `break-before` Utilities
 - Apply Responsive `break-before` Utilities in Tailwind CSS
 
-### ./docs-break-inside.md
+### ./references/docs-break-inside.md
 
 - Apply responsive break-inside utilities in HTML
 - Apply break-inside utilities in HTML
 
-### ./docs-caption-side.md
+### ./references/docs-caption-side.md
 
 - Responsive caption-side with breakpoint variants
 
-### ./docs-caret-color.md
+### ./references/docs-caret-color.md
 
 - Apply Responsive Caret Colors with Tailwind CSS
 - Set Custom Caret Color with Hex Value in Tailwind CSS
 
-### ./docs-clear.md
+### ./references/docs-clear.md
 
 - Apply Responsive Clears with Tailwind CSS Breakpoint Variants
 - Disable Clears with Tailwind CSS `clear-none` Utility
 
-### ./docs-color.md
+### ./references/docs-color.md
 
 - Apply predefined text color utilities in HTML
 - Apply responsive text color with breakpoint variants in HTML
 
-### ./docs-color-scheme.md
+### ./references/docs-color-scheme.md
 
 - Apply Tailwind CSS color scheme utilities conditionally in dark mode
 
-### ./docs-colors.md
+### ./references/docs-colors.md
 
 - Applying Tailwind CSS Color Utilities in a Notification Component (HTML)
 - Using Arbitrary Opacity Values and CSS Variables with Tailwind CSS Colors (HTML)
 
-### ./docs-columns.md
+### ./references/docs-columns.md
 
 - Apply responsive column layouts with Tailwind CSS breakpoints
 - Specify column gap with Tailwind CSS
@@ -333,7 +337,7 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Apply fixed number of columns with Tailwind CSS
 - Apply custom column width using CSS variables in Tailwind CSS
 
-### ./docs-compatibility.md
+### ./references/docs-compatibility.md
 
 - Use CSS Variables in CSS Modules to Improve Tailwind Performance
 - Apply color utilities with Tailwind hover states
@@ -344,22 +348,22 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Flatten nested CSS with Tailwind
 - Use CSS Variables in Vue/Svelte/Astro Components for Better Tailwind Performance
 
-### ./docs-content.md
+### ./references/docs-content.md
 
 - Set Content for Pseudo-elements with Tailwind CSS
 - Apply Responsive Content Utilities with Tailwind CSS
 - Control Tailwind CSS Content with CSS Variables
 
-### ./docs-cursor.md
+### ./references/docs-cursor.md
 
 - Apply Responsive Cursor Styles with Tailwind CSS
 - Apply Basic Cursor Styles with Tailwind CSS
 
-### ./docs-dark-mode.md
+### ./references/docs-dark-mode.md
 
 - Activate Tailwind CSS Dark Mode Manually with HTML Class
 
-### ./docs-detecting-classes-in-source-files.md
+### ./references/docs-detecting-classes-in-source-files.md
 
 - Correct Prop Mapping for Static Class Names in JSX
 - Advanced Prop Mapping for Varied Class Names in JSX
@@ -373,7 +377,7 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Incorrect Dynamic Class Name Construction with Props in JSX
 - Registering Additional Tailwind Source Paths in CSS
 
-### ./docs-display.md
+### ./references/docs-display.md
 
 - Create Inline Grid Containers with Tailwind CSS Inline-Grid Utility
 - Create Block Formatting Contexts with Tailwind CSS Flow Root Utility
@@ -383,23 +387,23 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Create Block-Level Flex Containers with Tailwind CSS Flex Utility
 - Create Grid Containers with Tailwind CSS Grid Utility
 
-### ./docs-editor-setup.md
+### ./references/docs-editor-setup.md
 
 - Sort Tailwind CSS Classes with Prettier Plugin (HTML)
 
-### ./docs-field-sizing.md
+### ./references/docs-field-sizing.md
 
 - Apply responsive field sizing with Tailwind CSS
 - Apply content-based field sizing with Tailwind CSS
 - Apply fixed field sizing with Tailwind CSS
 
-### ./docs-fill.md
+### ./references/docs-fill.md
 
 - Apply Tailwind CSS fill-cyan-300 utility
 - Customize Tailwind CSS Theme for Fill Colors
 - Apply Responsive Fill Colors to SVG in Tailwind CSS
 
-### ./docs-filter.md
+### ./references/docs-filter.md
 
 - Apply responsive filter utilities with breakpoints
 - Remove all filters with filter-none utility
@@ -408,62 +412,62 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Apply blur and grayscale filters with Tailwind CSS
 - Apply custom filter values with bracket notation
 
-### ./docs-filter-blur.md
+### ./references/docs-filter-blur.md
 
 - Apply responsive blur filters in Tailwind CSS
 
-### ./docs-filter-brightness.md
+### ./references/docs-filter-brightness.md
 
 - Apply Brightness Filters with Tailwind CSS and CSS Variables
 - Apply Basic Brightness Filters with Tailwind CSS
 - Apply Responsive Brightness Filters with Tailwind CSS
 - Apply Custom Brightness Filters with Tailwind CSS Arbitrary Values
 
-### ./docs-filter-contrast.md
+### ./references/docs-filter-contrast.md
 
 - Apply custom contrast value with bracket notation
 - Apply responsive contrast filter with breakpoint variants
 - Apply contrast filter using CSS custom properties
 - Apply contrast filter with predefined Tailwind utilities
 
-### ./docs-filter-drop-shadow.md
+### ./references/docs-filter-drop-shadow.md
 
 - Remove Drop Shadow with Tailwind CSS Utility
 - Adjust Drop Shadow Opacity with Tailwind CSS Modifiers
 - Set Drop Shadow Color with Tailwind CSS Color Utilities
 - Apply Drop Shadow with Tailwind CSS Classes
 
-### ./docs-filter-grayscale.md
+### ./references/docs-filter-grayscale.md
 
 - Apply Custom Grayscale Values and CSS Variables with Tailwind CSS
 - Apply Basic Grayscale Filters to Images using Tailwind CSS
 
-### ./docs-filter-hue-rotate.md
+### ./references/docs-filter-hue-rotate.md
 
 - Apply responsive hue-rotate utilities in HTML
 - Apply custom hue-rotate values with bracket notation in HTML
 - Apply negative hue-rotate values in HTML
 - Apply hue-rotate filter with predefined values in HTML
 
-### ./docs-filter-invert.md
+### ./references/docs-filter-invert.md
 
 - Apply Responsive Invert Filter with Tailwind CSS Breakpoints
 
-### ./docs-filter-saturate.md
+### ./references/docs-filter-saturate.md
 
 - Apply Basic Saturation Filters with Tailwind CSS
 - Use CSS Variables for Saturation with Tailwind CSS
 - Apply Responsive Saturation Filters with Tailwind CSS
 - Apply Custom Saturation Values with Tailwind CSS
 
-### ./docs-filter-sepia.md
+### ./references/docs-filter-sepia.md
 
 - Apply responsive sepia filters to images with Tailwind CSS breakpoints
 - Apply basic sepia filters to images with Tailwind CSS
 - Apply custom sepia filter values using Tailwind CSS arbitrary values
 - Apply sepia filter using CSS custom properties in Tailwind CSS
 
-### ./docs-flex.md
+### ./references/docs-flex.md
 
 - flex-initial Utility Example
 - Basic flex-1 Utility Example
@@ -473,7 +477,7 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Responsive flex Utility with Breakpoint Variant
 - Custom flex Property with CSS Variable
 
-### ./docs-flex-basis.md
+### ./references/docs-flex-basis.md
 
 - Apply flex-basis using percentage fractions in Tailwind CSS
 - Apply flex-basis using spacing scale in Tailwind CSS
@@ -483,7 +487,7 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Use custom container basis utility in Tailwind CSS
 - Apply flex-basis with custom CSS variables in Tailwind CSS
 
-### ./docs-flex-direction.md
+### ./references/docs-flex-direction.md
 
 - Apply responsive `flex-direction` with Tailwind CSS variants
 - Apply `flex-col` for vertical flex items in Tailwind CSS
@@ -491,7 +495,7 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Apply `flex-col-reverse` for reversed vertical flex items in Tailwind CSS
 - Apply `flex-row-reverse` for reversed horizontal flex items in Tailwind CSS
 
-### ./docs-flex-grow.md
+### ./references/docs-flex-grow.md
 
 - Applying Responsive Flex Grow Utilities with Tailwind CSS Breakpoints
 - Setting Custom Flex Grow Values with Tailwind CSS `grow-[<value>]` Syntax
@@ -500,33 +504,33 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Applying CSS Variables for Flex Grow with Tailwind CSS `grow-(<custom-property>)`
 - Preventing Flex Items from Growing with Tailwind CSS `grow-0` Utility
 
-### ./docs-flex-shrink.md
+### ./references/docs-flex-shrink.md
 
 - Applying Responsive Shrink Utilities with Tailwind CSS
 - Using Custom Shrink Values with Tailwind CSS
 - Using CSS Variables for Shrink Values in Tailwind CSS
 - Allowing Flex Items to Shrink with Tailwind CSS
 
-### ./docs-flex-wrap.md
+### ./references/docs-flex-wrap.md
 
 - Apply Responsive Flex Wrap Utilities with Tailwind CSS
 
-### ./docs-float.md
+### ./references/docs-float.md
 
 - Apply Logical Float Properties with Tailwind CSS
 - Apply Responsive Float with Tailwind CSS Breakpoints
 
-### ./docs-font-size.md
+### ./references/docs-font-size.md
 
 - Set font-size with line-height modifiers in HTML
 - Define Custom Font Size Utility in Tailwind CSS Theme
 - Apply responsive font-size utilities in HTML
 
-### ./docs-font-smoothing.md
+### ./references/docs-font-smoothing.md
 
 - Responsive font-smoothing with Tailwind CSS breakpoints
 
-### ./docs-font-stretch.md
+### ./references/docs-font-stretch.md
 
 - Apply responsive font-stretch utilities in HTML with Tailwind CSS
 - Apply percentage-based font-stretch in HTML with Tailwind CSS
@@ -534,74 +538,74 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Apply CSS variable for font-stretch in HTML with Tailwind CSS
 - Apply custom font-stretch values in HTML with Tailwind CSS
 
-### ./docs-font-style.md
+### ./references/docs-font-style.md
 
 - Responsive font-style with Tailwind CSS breakpoints
 
-### ./docs-font-variant-numeric.md
+### ./references/docs-font-variant-numeric.md
 
 - Combine Multiple Numeric Font Variants with Tailwind CSS
 
-### ./docs-font-weight.md
+### ./references/docs-font-weight.md
 
 - Apply responsive font-weight with breakpoint variants
 
-### ./docs-forced-color-adjust.md
+### ./references/docs-forced-color-adjust.md
 
 - Restoring forced colors with Tailwind CSS
 - Applying forced-color-adjust responsively with Tailwind CSS
 - Opting out of forced colors with Tailwind CSS
 
-### ./docs-functions-and-directives.md
+### ./references/docs-functions-and-directives.md
 
 - Load Legacy Tailwind CSS Plugin with @plugin Directive (CSS)
 - Access Tailwind Theme Values with theme() Function (CSS)
 - Generate spacing values with --spacing() function
 
-### ./docs-gap.md
+### ./references/docs-gap.md
 
 - Apply responsive gap in Tailwind CSS
 - Apply custom gap value in Tailwind CSS
 - Apply uniform gap in Tailwind CSS Grid
 - Apply custom gap using CSS variable in Tailwind CSS
 
-### ./docs-grid-auto-columns.md
+### ./references/docs-grid-auto-columns.md
 
 - Apply responsive grid-auto-columns utilities in Tailwind CSS
 - Apply basic grid-auto-columns utilities in Tailwind CSS
 - Set custom grid-auto-columns value in Tailwind CSS
 - Apply grid-auto-columns with CSS variables in Tailwind CSS
 
-### ./docs-grid-auto-flow.md
+### ./references/docs-grid-auto-flow.md
 
 - Basic grid-auto-flow Example - Tailwind HTML
 - Responsive grid-auto-flow Design - Tailwind HTML
 
-### ./docs-grid-auto-rows.md
+### ./references/docs-grid-auto-rows.md
 
 - Implement responsive `grid-auto-rows` with Tailwind CSS breakpoints
 - Apply basic `grid-auto-rows` utilities in Tailwind CSS
 
-### ./docs-grid-column.md
+### ./references/docs-grid-column.md
 
 - Control Grid Column Start/End with Tailwind CSS `col-start`/`col-end`
 - Implement Responsive Grid Column Spanning with Tailwind CSS Breakpoints
 - Span Columns with Tailwind CSS `col-span-<number>`
 
-### ./docs-grid-row.md
+### ./references/docs-grid-row.md
 
 - Starting and ending grid lines with row-start and row-end
 - Spanning rows with row-span utilities
 - Custom grid-row values with bracket notation
 - CSS custom properties with row utilities
 
-### ./docs-grid-template-columns.md
+### ./references/docs-grid-template-columns.md
 
 - Apply responsive grid column utilities with Tailwind CSS breakpoints
 - Define grid columns with Tailwind CSS `grid-cols-<number>` utility
 - Implement a subgrid using Tailwind CSS `grid-cols-subgrid`
 
-### ./docs-grid-template-rows.md
+### ./references/docs-grid-template-rows.md
 
 - Apply Responsive Grid Row Utilities with Tailwind CSS
 - Implement Subgrid with Tailwind CSS `grid-rows-subgrid`
@@ -609,13 +613,13 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Set Custom Grid Row Values with Tailwind CSS `grid-rows-[<value>]`
 - Set Grid Rows with CSS Variables using Tailwind CSS `grid-rows-(<custom-property>)`
 
-### ./docs-height.md
+### ./references/docs-height.md
 
 - Apply Responsive Height with Tailwind CSS Breakpoint Variants
 - Set Both Width and Height with Tailwind CSS size-* Utilities
 - Set Percentage-Based Height with Tailwind CSS h-full and h-<fraction> Utilities
 
-### ./docs-hover-focus-and-other-states.md
+### ./references/docs-hover-focus-and-other-states.md
 
 - Apply Styles for Element Initial Render or Display Transition (Tailwind CSS HTML)
 - Style Popovers in Open State
@@ -654,21 +658,21 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Apply Styles Based on Pointing Device Accuracy (Tailwind CSS HTML)
 - Tailwind CSS Container Query Variants
 
-### ./docs-hyphens.md
+### ./references/docs-hyphens.md
 
 - Responsive hyphens utility with breakpoint variant
 
-### ./docs-index.md
+### ./references/docs-index.md
 
 - Create a new Vite project using npm
 - Configure Tailwind CSS Vite plugin in vite.config.ts
 - Basic HTML structure with Tailwind CSS classes
 
-### ./docs-installation.md
+### ./references/docs-installation.md
 
 - HTML Template with Tailwind CSS Utilities
 
-### ./docs-installation-framework-guides-adonisjs.md
+### ./references/docs-installation-framework-guides-adonisjs.md
 
 - Start Development Server
 - Create AdonisJS Project
@@ -677,7 +681,7 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Configure Tailwind CSS Vite Plugin
 - Import Tailwind CSS and Configure Source Scanning
 
-### ./docs-installation-framework-guides-angular.md
+### ./references/docs-installation-framework-guides-angular.md
 
 - Start Angular development server
 - Create new Angular project using Angular CLI
@@ -685,7 +689,7 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Configure PostCSS to use Tailwind CSS plugin
 - Apply Tailwind CSS utility classes in Angular component template
 
-### ./docs-installation-framework-guides-astro.md
+### ./references/docs-installation-framework-guides-astro.md
 
 - Start Development Server
 - Create Astro Project with npm
@@ -694,7 +698,7 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Import Tailwind CSS in Global Stylesheet
 - Configure Tailwind CSS Vite Plugin in Astro
 
-### ./docs-installation-framework-guides-emberjs.md
+### ./references/docs-installation-framework-guides-emberjs.md
 
 - Create a new Ember.js project
 - Import application CSS file into Ember.js main application file
@@ -703,7 +707,7 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Add Tailwind CSS PostCSS plugin configuration
 - Enable PostCSS support in Ember CLI build configuration
 
-### ./docs-installation-framework-guides-gatsby.md
+### ./references/docs-installation-framework-guides-gatsby.md
 
 - Start Gatsby Development Server
 - Create Gatsby Project with CLI
@@ -714,7 +718,7 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Import Global CSS in Gatsby Browser
 - Enable Gatsby PostCSS Plugin
 
-### ./docs-installation-framework-guides-laravel-mix.md
+### ./references/docs-installation-framework-guides-laravel-mix.md
 
 - Start Laravel Mix build process with watch mode
 - Install Tailwind CSS npm dependencies
@@ -722,14 +726,14 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Configure Tailwind CSS in Laravel Mix webpack.mix.js
 - Import Tailwind CSS and configure content scanning
 
-### ./docs-installation-framework-guides-laravel-vite.md
+### ./references/docs-installation-framework-guides-laravel-vite.md
 
 - Start Development Build Process
 - Create New Laravel Project
 - Install Tailwind CSS and Vite Plugin
 - Configure Vite Plugin for Tailwind CSS
 
-### ./docs-installation-framework-guides-meteor.md
+### ./references/docs-installation-framework-guides-meteor.md
 
 - Start Meteor Development Server
 - Create Meteor Project with CLI
@@ -737,20 +741,20 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Install Tailwind CSS and Dependencies via npm
 - Configure PostCSS Plugins for Tailwind
 
-### ./docs-installation-framework-guides-nextjs.md
+### ./references/docs-installation-framework-guides-nextjs.md
 
 - Create a New Next.js Project with TypeScript and ESLint
 - Configure PostCSS for Tailwind CSS in Next.js
 - Apply Tailwind CSS Classes in a Next.js React Component
 
-### ./docs-installation-framework-guides-nuxt.md
+### ./references/docs-installation-framework-guides-nuxt.md
 
 - Create a new Nuxt.js project using npm
 - Apply Tailwind CSS classes in a Vue component template
 - Globally link main.css in nuxt.config.ts for Nuxt
 - Configure Tailwind CSS Vite Plugin in nuxt.config.ts
 
-### ./docs-installation-framework-guides-parcel.md
+### ./references/docs-installation-framework-guides-parcel.md
 
 - Start Parcel development server
 - Create Parcel project with npm
@@ -758,7 +762,7 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Install Tailwind CSS and PostCSS dependencies
 - Configure PostCSS for Tailwind CSS
 
-### ./docs-installation-framework-guides-phoenix.md
+### ./references/docs-installation-framework-guides-phoenix.md
 
 - Start Phoenix server with Tailwind CSS build
 - Create a new Phoenix project
@@ -770,18 +774,18 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Add Tailwind plugin dependency in Phoenix
 - Remove default CSS import from Phoenix JavaScript
 
-### ./docs-installation-framework-guides-qwik.md
+### ./references/docs-installation-framework-guides-qwik.md
 
 - Create a new Qwik project using npm
 - Apply Tailwind CSS classes in a Qwik component
 - Configure Tailwind CSS Vite plugin in vite.config.ts
 
-### ./docs-installation-framework-guides-react-router.md
+### ./references/docs-installation-framework-guides-react-router.md
 
 - Create a new React Router project using npx
 - Configure Vite to use Tailwind CSS and React Router plugins
 
-### ./docs-installation-framework-guides-rspack-react.md
+### ./references/docs-installation-framework-guides-rspack-react.md
 
 - Example React Component Using Tailwind CSS Classes
 - Create Rspack Project using npm CLI
@@ -789,31 +793,31 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Configure PostCSS to Use Tailwind CSS Plugin
 - Configure Rspack to Use PostCSS Loader for CSS
 
-### ./docs-installation-framework-guides-rspack-vue.md
+### ./references/docs-installation-framework-guides-rspack-vue.md
 
 - Use Tailwind Utility Classes in Vue Component
 
-### ./docs-installation-framework-guides-ruby-on-rails.md
+### ./references/docs-installation-framework-guides-ruby-on-rails.md
 
 - Start Development Build Process
 - Create New Rails Project
 - Apply Tailwind Utility Classes in ERB Template
 - Install Tailwind CSS Rails Gem
 
-### ./docs-installation-framework-guides-solidjs.md
+### ./references/docs-installation-framework-guides-solidjs.md
 
 - Create new SolidJS project with Vite template
 - Apply Tailwind CSS utility classes in SolidJS `App.jsx` component
 - Configure Vite plugin for Tailwind CSS in SolidJS `vite.config.ts`
 
-### ./docs-installation-framework-guides-sveltekit.md
+### ./references/docs-installation-framework-guides-sveltekit.md
 
 - Create SvelteKit Project
 - Use Tailwind CSS Utility Classes
 - Import CSS in SvelteKit Layout
 - Configure Tailwind CSS Vite Plugin
 
-### ./docs-installation-framework-guides-symfony.md
+### ./references/docs-installation-framework-guides-symfony.md
 
 - Create a new Symfony web application project
 - Install Webpack Encore for asset management in Symfony
@@ -822,41 +826,41 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Enable PostCSS Loader in webpack.config.js for Symfony Encore
 - Import Tailwind CSS and configure source in app.css
 
-### ./docs-installation-framework-guides-tanstack-start.md
+### ./references/docs-installation-framework-guides-tanstack-start.md
 
 - Create TanStack Start Project
 - Link CSS File in Root Route
 - Configure Vite Plugin for Tailwind CSS
 - Use Tailwind CSS Utility Classes in Components
 
-### ./docs-installation-play-cdn.md
+### ./references/docs-installation-play-cdn.md
 
 - Add Play CDN Script to HTML
 - Configure Custom Tailwind CSS Theme with Play CDN
 
-### ./docs-installation-tailwind-cli.md
+### ./references/docs-installation-tailwind-cli.md
 
 - Include compiled Tailwind CSS in HTML and use utility classes
 - Install Tailwind CSS and CLI via npm
 - Run Tailwind CLI to build CSS with watch mode
 
-### ./docs-installation-using-postcss.md
+### ./references/docs-installation-using-postcss.md
 
 - Basic HTML structure with Tailwind CSS styling
 - Configure Tailwind CSS PostCSS plugin in JavaScript
 
-### ./docs-installation-using-vite.md
+### ./references/docs-installation-using-vite.md
 
 - Create Vite Project with npm
 - Use Tailwind CSS Utility Classes in HTML
 - Configure Tailwind CSS Vite Plugin
 
-### ./docs-isolation.md
+### ./references/docs-isolation.md
 
 - Apply responsive isolation utility with breakpoint variant
 - Apply isolation utility to create stacking context
 
-### ./docs-justify-content.md
+### ./references/docs-justify-content.md
 
 - Align items to start of main axis with Tailwind CSS `justify-start`
 - Distribute items with space between using Tailwind CSS `justify-between`
@@ -868,21 +872,21 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Reset justify-content to normal with Tailwind CSS `justify-normal`
 - Center items along main axis with Tailwind CSS `justify-center` and `justify-center-safe`
 
-### ./docs-justify-items.md
+### ./references/docs-justify-items.md
 
 - Apply justify-items-end and justify-items-end-safe to grid items in HTML
 - Apply justify-items-center and justify-items-center-safe to grid items in HTML
 - Apply responsive justify-items utilities in HTML
 - Apply justify-items-start to grid items in HTML
 
-### ./docs-justify-self.md
+### ./references/docs-justify-self.md
 
 - justify-self with responsive breakpoints
 - justify-self-start - Align grid item to inline start
 - justify-self-center - Center grid item on inline axis
 - justify-self-end - Align grid item to inline end
 
-### ./docs-line-clamp.md
+### ./references/docs-line-clamp.md
 
 - Responsive line-clamp with breakpoint variants
 - Undo line clamping with line-clamp-none
@@ -890,27 +894,27 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Custom line-clamp value with bracket notation
 - Custom line-clamp with CSS custom property
 
-### ./docs-line-height.md
+### ./references/docs-line-height.md
 
 - Custom line-height values with bracket notation in Tailwind CSS
 - Responsive line-height with breakpoint variants in Tailwind CSS
 - Combined font-size and line-height with Tailwind CSS
 - Independent line-height with leading utilities in Tailwind CSS
 
-### ./docs-list-style-image.md
+### ./references/docs-list-style-image.md
 
 - Apply responsive marker image with breakpoint variant
 
-### ./docs-list-style-position.md
+### ./references/docs-list-style-position.md
 
 - Applying responsive list-style-position utilities in HTML
 - Applying list-style-position utilities in HTML
 
-### ./docs-list-style-type.md
+### ./references/docs-list-style-type.md
 
 - Apply responsive list-style-type utilities with breakpoint variants
 
-### ./docs-margin.md
+### ./references/docs-margin.md
 
 - Responsive Margin Utility HTML Example
 - Logical Properties Margin Utilities HTML Example
@@ -927,15 +931,15 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Space X Reverse Direction CSS Implementation
 - Space Y Custom Property Margin CSS Implementation
 
-### ./docs-mask-clip.md
+### ./references/docs-mask-clip.md
 
 - Apply responsive mask-clip utilities with breakpoint variants
 
-### ./docs-mask-composite.md
+### ./references/docs-mask-composite.md
 
 - Apply responsive mask-composite utilities in HTML with Tailwind CSS
 
-### ./docs-mask-image.md
+### ./references/docs-mask-image.md
 
 - Add Radial Mask with Gradient and Position in Tailwind CSS
 - Customize Conic Gradient Mask Start Color
@@ -949,22 +953,22 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Mask X-Axis From Gradient - Tailwind CSS
 - Set Radial Gradient Position with Tailwind CSS Utilities
 
-### ./docs-mask-mode.md
+### ./references/docs-mask-mode.md
 
 - Apply basic mask-mode utilities in HTML
 - Apply responsive mask-mode utilities in HTML
 
-### ./docs-mask-origin.md
+### ./references/docs-mask-origin.md
 
 - Apply responsive mask-origin with breakpoint variants
 
-### ./docs-mask-position.md
+### ./references/docs-mask-position.md
 
 - Apply responsive Tailwind CSS mask-position utilities
 - Apply Tailwind CSS mask-position utilities for basic positioning
 - Set Tailwind CSS mask-position with custom arbitrary values
 
-### ./docs-mask-size.md
+### ./references/docs-mask-size.md
 
 - Apply responsive mask-size utilities in HTML
 - Apply mask-cover utility in HTML
@@ -972,13 +976,13 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Apply custom mask-size value in HTML
 - Apply mask-contain utility in HTML
 
-### ./docs-max-height.md
+### ./references/docs-max-height.md
 
 - Set Percentage-Based Maximum Height with Tailwind CSS
 - Apply Custom CSS Variable Maximum Height with Tailwind CSS
 - Implement Responsive Maximum Height with Tailwind CSS
 
-### ./docs-max-width.md
+### ./references/docs-max-width.md
 
 - Container utility with responsive breakpoints in HTML
 - Basic max-width with spacing scale in HTML
@@ -987,7 +991,7 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Responsive max-width with breakpoint variants in HTML
 - Custom max-width with CSS variables in HTML
 
-### ./docs-min-height.md
+### ./references/docs-min-height.md
 
 - Apply responsive min-height utilities in HTML
 - Apply min-height with percentage-based utilities in HTML
@@ -995,7 +999,7 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Apply min-height with custom CSS properties in HTML
 - Apply min-height with spacing scale utilities in HTML
 
-### ./docs-min-width.md
+### ./references/docs-min-width.md
 
 - Apply Percentage-Based Minimum Width with Tailwind CSS `min-w-<fraction>` Utilities
 - Apply Custom CSS Variable for Minimum Width with Tailwind CSS
@@ -1004,13 +1008,13 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Apply Responsive Minimum Width with Tailwind CSS Breakpoint Variants
 - Apply Custom Minimum Width with Tailwind CSS `min-w-[<value>]` Syntax
 
-### ./docs-mix-blend-mode.md
+### ./references/docs-mix-blend-mode.md
 
 - Apply responsive mix-blend-mode utilities in Tailwind CSS
 - Apply basic mix-blend-mode utilities in Tailwind CSS
 - Isolate mix-blend-mode effects in Tailwind CSS
 
-### ./docs-object-fit.md
+### ./references/docs-object-fit.md
 
 - Applying responsive `object-fit` utilities with Tailwind CSS
 - Resizing to cover using Tailwind CSS `object-cover`
@@ -1019,13 +1023,13 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Displaying content at original size using Tailwind CSS `object-none`
 - Containing content within its container using Tailwind CSS `object-contain`
 
-### ./docs-object-position.md
+### ./references/docs-object-position.md
 
 - Apply object-position utilities in HTML with Tailwind CSS
 - Set object-position using CSS variable in HTML with Tailwind CSS
 - Apply responsive object-position in HTML with Tailwind CSS
 
-### ./docs-opacity.md
+### ./references/docs-opacity.md
 
 - Apply Tailwind CSS Opacity Responsively with Breakpoint Variants
 - Set Tailwind CSS Opacity with Custom CSS Variables
@@ -1033,7 +1037,7 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Set Tailwind CSS Opacity with Custom Numeric Values
 - Apply Tailwind CSS Opacity Utilities for Basic Elements
 
-### ./docs-order.md
+### ./references/docs-order.md
 
 - Explicitly setting sort order with numeric classes
 - Responsive order utility with breakpoint variants
@@ -1042,37 +1046,37 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Using CSS custom properties with order utility
 - Using negative order values
 
-### ./docs-outline-offset.md
+### ./references/docs-outline-offset.md
 
 - Apply Responsive Outline Offset in Tailwind CSS
 - Apply Outline Offset using CSS Variables in Tailwind CSS
 - Set Custom Outline Offset Values in Tailwind CSS
 
-### ./docs-outline-style.md
+### ./references/docs-outline-style.md
 
 - Apply outline styles to buttons with Tailwind CSS
 - Responsive outline-style with breakpoint variant in Tailwind CSS
 
-### ./docs-outline-width.md
+### ./references/docs-outline-width.md
 
 - Custom outline-width value with bracket notation in HTML
 - Basic outline-width utilities in HTML
 
-### ./docs-overflow.md
+### ./references/docs-overflow.md
 
 - Applying Responsive Overflow Utilities with Tailwind CSS
 
-### ./docs-overflow-wrap.md
+### ./references/docs-overflow-wrap.md
 
 - Apply responsive `overflow-wrap` utilities in HTML with Tailwind CSS
 
-### ./docs-padding.md
+### ./references/docs-padding.md
 
 - Basic Padding Utility - Tailwind CSS
 - Responsive Padding Design - Tailwind CSS
 - Logical Padding Properties - Tailwind CSS
 
-### ./docs-perspective.md
+### ./references/docs-perspective.md
 
 - Responsive Perspective Design with Breakpoint Variants
 - Basic Perspective Transform with Tailwind CSS
@@ -1080,17 +1084,17 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Custom Perspective with CSS Variables
 - Custom Perspective Value with Arbitrary Values
 
-### ./docs-perspective-origin.md
+### ./references/docs-perspective-origin.md
 
 - Apply responsive perspective-origin utilities in Tailwind CSS
 - Apply Tailwind CSS perspective-origin utilities for basic positioning
 
-### ./docs-place-content.md
+### ./references/docs-place-content.md
 
 - place-content-start - Align Grid Content to Start
 - place-content with Responsive Breakpoints - Tailwind CSS
 
-### ./docs-place-items.md
+### ./references/docs-place-items.md
 
 - Apply place-items-start utility in Tailwind CSS
 - Apply responsive place-items utilities in Tailwind CSS
@@ -1098,22 +1102,22 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Apply place-items-center utility in Tailwind CSS
 - Apply place-items-end utility in Tailwind CSS
 
-### ./docs-place-self.md
+### ./references/docs-place-self.md
 
 - place-self-start - Align item to start on both axes
 
-### ./docs-pointer-events.md
+### ./references/docs-pointer-events.md
 
 - Controlling pointer events for elements in HTML with Tailwind CSS
 - Conditionally restoring pointer events in HTML with Tailwind CSS
 
-### ./docs-position.md
+### ./references/docs-position.md
 
 - Apply Absolute Positioning in Tailwind CSS
 - Apply Fixed Positioning in Tailwind CSS
 - Apply Responsive Positioning in Tailwind CSS
 
-### ./docs-preflight.md
+### ./references/docs-preflight.md
 
 - Styling Unstyled Lists with Tailwind CSS Utilities
 - Overriding Block Display for Images with Tailwind CSS Utility
@@ -1125,11 +1129,11 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Unstyling Default List Elements with Preflight CSS
 - Constraining Images and Videos to Parent Width with Preflight CSS
 
-### ./docs-resize.md
+### ./references/docs-resize.md
 
 - Responsive resize utilities with Tailwind CSS breakpoints
 
-### ./docs-responsive-design.md
+### ./references/docs-responsive-design.md
 
 - Apply Responsive Utility Variants with Breakpoint Prefixes
 - Build Responsive Marketing Component with Tailwind CSS
@@ -1142,7 +1146,7 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Incorrect Mobile-First Responsive Styling Pattern
 - Apply Arbitrary Container Query Values in HTML
 
-### ./docs-rotate.md
+### ./references/docs-rotate.md
 
 - Apply 3D Rotations with Tailwind CSS
 - Apply Basic 2D Rotations with Tailwind CSS
@@ -1151,20 +1155,20 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Apply Custom Rotation Values with Tailwind CSS
 - Apply Negative 2D Rotations with Tailwind CSS
 
-### ./docs-scale.md
+### ./references/docs-scale.md
 
 - Apply Negative Scale Transforms with Tailwind CSS
 - Apply Basic Scale Transforms with Tailwind CSS
 - Apply Custom Scale Values with Tailwind CSS
 
-### ./docs-scroll-margin.md
+### ./references/docs-scroll-margin.md
 
 - Apply Responsive Scroll Margin with Breakpoint Variants
 - Apply Basic Scroll Margin in HTML with Tailwind CSS
 - Apply Logical Scroll Margin Properties in HTML with Tailwind CSS
 - Apply Negative Scroll Margin in HTML with Tailwind CSS
 
-### ./docs-scroll-padding.md
+### ./references/docs-scroll-padding.md
 
 - Using logical scroll-padding properties in HTML
 - Basic scroll-padding with directional utilities in HTML
@@ -1172,39 +1176,39 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Custom scroll-padding values in HTML
 - Negative scroll-padding values in HTML
 
-### ./docs-scroll-snap-align.md
+### ./references/docs-scroll-snap-align.md
 
 - Snap Start Alignment with Tailwind CSS
 - Responsive Scroll Snap Alignment with Tailwind CSS
 - Snap Center Alignment with Tailwind CSS
 - Snap End Alignment with Tailwind CSS
 
-### ./docs-scroll-snap-stop.md
+### ./references/docs-scroll-snap-stop.md
 
 - Apply `snap-normal` for skipping scroll snap stops in Tailwind CSS
 - Apply `snap-always` for forced scroll snap stops in Tailwind CSS
 
-### ./docs-scroll-snap-type.md
+### ./references/docs-scroll-snap-type.md
 
 - Responsive scroll-snap-type with breakpoint variant
 
-### ./docs-skew.md
+### ./references/docs-skew.md
 
 - Responsive skew transform with breakpoint variants
 - Basic skew transform on both axes
 
-### ./docs-stroke.md
+### ./references/docs-stroke.md
 
 - Use Custom Theme Stroke Color in Tailwind CSS Markup
 - Apply Neutral Stroke Colors in Tailwind CSS
 - Apply Custom CSS Variable Stroke Color to SVG in Tailwind CSS
 - Set SVG Stroke Color to Current Text Color with Tailwind CSS
 
-### ./docs-stroke-width.md
+### ./references/docs-stroke-width.md
 
 - Apply Responsive Stroke Width with Tailwind CSS Breakpoints
 
-### ./docs-styling-with-utility-classes.md
+### ./references/docs-styling-with-utility-classes.md
 
 - Creating a responsive profile card with Tailwind CSS
 - Complex Arbitrary Grid Values in Tailwind CSS
@@ -1232,18 +1236,18 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Set Custom CSS Variables with Tailwind CSS Arbitrary Values (HTML)
 - React component with Tailwind CSS for reusable card styling
 
-### ./docs-table-layout.md
+### ./references/docs-table-layout.md
 
 - Apply automatic table column sizing with Tailwind CSS `table-auto`
 - Apply responsive table layout with Tailwind CSS breakpoints
 - Apply fixed table column widths with Tailwind CSS `table-fixed`
 
-### ./docs-text-align.md
+### ./references/docs-text-align.md
 
 - Logical text alignment with text-start and text-end utilities
 - Responsive text alignment with breakpoint variants
 
-### ./docs-text-decoration-color.md
+### ./references/docs-text-decoration-color.md
 
 - Implement Responsive Text Decoration Colors with Tailwind CSS
 - Apply Basic Text Decoration Colors with Tailwind CSS
@@ -1251,52 +1255,52 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Utilize Custom Theme Color for Text Decoration in Tailwind CSS
 - Set Custom Hex Text Decoration Color in Tailwind CSS
 
-### ./docs-text-decoration-style.md
+### ./references/docs-text-decoration-style.md
 
 - Apply Basic Text Decoration Styles with Tailwind CSS
 - Apply Responsive Text Decoration Styles with Tailwind CSS
 
-### ./docs-text-decoration-thickness.md
+### ./references/docs-text-decoration-thickness.md
 
 - Apply Numeric Text Decoration Thickness with Tailwind CSS
 - Apply CSS Variable for Text Decoration Thickness in Tailwind CSS
 - Apply Responsive Text Decoration Thickness with Tailwind CSS
 
-### ./docs-text-indent.md
+### ./references/docs-text-indent.md
 
 - Apply responsive text indentation with breakpoint variants
 - Apply custom text indentation values with bracket notation
 - Apply text indentation with indent utility classes
 - Apply custom text indentation with CSS variables
 
-### ./docs-text-overflow.md
+### ./references/docs-text-overflow.md
 
 - Responsive text-overflow with breakpoint variants - HTML
 
-### ./docs-text-shadow.md
+### ./references/docs-text-shadow.md
 
 - Apply Text Shadow Color Utilities - Tailwind CSS HTML
 - Apply Custom Text Shadow Utility in Markup
 - Apply Responsive Text Shadow with Breakpoint Variant
 
-### ./docs-text-transform.md
+### ./references/docs-text-transform.md
 
 - Responsive text-transform with Tailwind CSS breakpoints
 
-### ./docs-text-underline-offset.md
+### ./references/docs-text-underline-offset.md
 
 - Apply Responsive Underline Offset in Tailwind CSS
 - Apply Basic Underline Offset in Tailwind CSS
 - Apply Custom Underline Offset Value in Tailwind CSS
 - Apply Underline Offset with CSS Variable in Tailwind CSS
 
-### ./docs-text-wrap.md
+### ./references/docs-text-wrap.md
 
 - Implementing responsive text wrapping with Tailwind CSS
 - Balancing text wrapping with Tailwind CSS `text-balance`
 - Allowing text to wrap with Tailwind CSS `text-wrap`
 
-### ./docs-theme.md
+### ./references/docs-theme.md
 
 - Override default theme variable value
 - Define Breakpoint Theme Variable
@@ -1304,7 +1308,7 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Utilize Tailwind CSS Theme Variables in HTML Arbitrary Values
 - Retrieve Resolved Tailwind CSS Theme Variable Values in JavaScript
 
-### ./docs-top-right-bottom-left.md
+### ./references/docs-top-right-bottom-left.md
 
 - Tailwind CSS `start` Utilities for Inline Start Placement
 - Apply Responsive Positioning with Breakpoint Variants in Tailwind CSS
@@ -1313,31 +1317,31 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Set Custom Position Values in Tailwind CSS
 - Position Elements with Top, Right, Bottom, Left Utilities in Tailwind CSS
 
-### ./docs-touch-action.md
+### ./references/docs-touch-action.md
 
 - Responsive touch-action with Breakpoint Variants HTML
 - Basic touch-action Utilities HTML
 
-### ./docs-transform.md
+### ./references/docs-transform.md
 
 - Apply Hardware Accelerated Transforms with Tailwind CSS
 
-### ./docs-transform-origin.md
+### ./references/docs-transform-origin.md
 
 - Apply Responsive Transform Origin in Tailwind CSS
 - Apply Transform Origin with CSS Variable in Tailwind CSS
 
-### ./docs-transform-style.md
+### ./references/docs-transform-style.md
 
 - Responsive transform-style with breakpoint variant
 - transform-3d and transform-flat HTML classes
 
-### ./docs-transition-behavior.md
+### ./references/docs-transition-behavior.md
 
 - Responsive transition-behavior with Breakpoint Variant
 - Basic transition-behavior HTML Example
 
-### ./docs-transition-delay.md
+### ./references/docs-transition-delay.md
 
 - transition-delay with motion-reduce variant
 - transition-delay with custom CSS property
@@ -1345,18 +1349,18 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - transition-delay with responsive breakpoint variant
 - Basic transition-delay HTML markup with Tailwind classes
 
-### ./docs-transition-duration.md
+### ./references/docs-transition-duration.md
 
 - Apply predefined transition durations with Tailwind CSS
 - Apply responsive transition durations with Tailwind CSS breakpoints
 - Set custom transition duration values with Tailwind CSS arbitrary values
 
-### ./docs-transition-property.md
+### ./references/docs-transition-property.md
 
 - Custom transition-property with bracket notation
 - Responsive transition-property with breakpoint variant
 
-### ./docs-transition-timing-function.md
+### ./references/docs-transition-timing-function.md
 
 - Apply responsive transition timing functions with Tailwind CSS
 - Use custom theme transition timing function utility in HTML
@@ -1365,7 +1369,7 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Apply basic transition timing functions with Tailwind CSS
 - Customize Tailwind CSS transition timing function theme variables
 
-### ./docs-translate.md
+### ./references/docs-translate.md
 
 - Apply 2D Translation with Percentage Values in Tailwind CSS
 - Apply Y-axis Translation in Tailwind CSS
@@ -1373,7 +1377,7 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Apply 2D Translation with Spacing Scale in Tailwind CSS
 - Apply Responsive Translation with Tailwind CSS Breakpoint Variants
 
-### ./docs-upgrade-guide.md
+### ./references/docs-upgrade-guide.md
 
 - Update Tailwind CLI Commands for v4 Package
 - Configure PostCSS for Tailwind CSS v4 Migration
@@ -1412,23 +1416,23 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Tailwind CSS v4 `divide-x/y` utility selector change
 - Manage Tailwind CSS v4 default border color for `border` and `divide` utilities
 
-### ./docs-user-select.md
+### ./references/docs-user-select.md
 
 - Responsive user-select with breakpoint variants
 
-### ./docs-visibility.md
+### ./references/docs-visibility.md
 
 - Apply Responsive Visibility with Tailwind CSS Breakpoints
 - Collapse Table Row with Tailwind CSS `collapse` Utility
 
-### ./docs-white-space.md
+### ./references/docs-white-space.md
 
 - Use responsive white-space utility with breakpoint prefix
 - Apply whitespace-pre utility in HTML
 - Apply whitespace-pre-line utility in HTML
 - Apply whitespace-pre-wrap utility in HTML
 
-### ./docs-width.md
+### ./references/docs-width.md
 
 - Apply Percentage-Based Widths with Tailwind CSS `w-<fraction>` Utilities
 - Set Widths Based on Container Scale with Tailwind CSS Utilities
@@ -1437,10 +1441,10 @@ description: Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS �
 - Reset Element Width Conditionally with Tailwind CSS `w-auto`
 - Apply Responsive Width Utilities in Tailwind CSS
 
-### ./docs-word-break.md
+### ./references/docs-word-break.md
 
 - Apply responsive word breaking with Tailwind CSS
 
-### ./docs-z-index.md
+### ./references/docs-z-index.md
 
 - Responsive z-index with Tailwind CSS breakpoints
