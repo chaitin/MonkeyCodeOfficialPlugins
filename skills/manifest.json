@@ -278,12 +278,27 @@
         "zh": "shadcn/ui 组件库助手"
       },
       "description": {
-        "en": "Guide for installing, configuring, theming, and troubleshooting shadcn/ui in React/Next.js/Vite/Remix projects. Triggers when initializing the CLI, consulting component APIs, tuning themes/tokens/dark mode, or resolving Radix/Tailwind integration issues.",
+        "en": "Guide for installing, configuring, theming, and troubleshooting shadcn/ui in React/Next.js/Vite/Remix projects. Triggers when initializing a CLI, consulting component APIs, tuning themes/tokens/dark mode, or resolving Radix/Tailwind integration issues.",
         "zh": "shadcn/ui 组件库的安装、配置、主题定制与排障指南。适用于在 React/Next.js/Vite/Remix 项目中初始化 CLI、查阅组件 API、调整主题/令牌/暗色模式或排查 Radix 与 Tailwind 集成问题时。"
       },
       "categories": ["frontend", "components", "design-systems"],
       "tags": ["前端", "开发", "组件库", "UI"],
       "skill_md_path": "shadcnui-helper/SKILL.md",
+      "is_enabled": true
+    },
+    {
+      "skill_id": "tailwindcss-helper",
+      "name": {
+        "en": "Tailwind CSS Helper",
+        "zh": "Tailwind CSS 参考助手"
+      },
+      "description": {
+        "en": "Tailwind CSS utility class reference and documentation assistant. Provides instant access to Tailwind CSS documentation for looking up utility classes, understanding CSS properties, and finding code examples. Use when looking up specific utility classes, understanding how to implement CSS properties, finding examples and best practices, or learning about responsive design patterns, dark mode, hover states, and other variants.",
+        "zh": "Tailwind CSS 工具类参考和文档助手。提供 Tailwind CSS 文档的快速访问，用于查找工具类、理解 CSS 属性和查找代码示例。在需要查找特定工具类、了解如何实现 CSS 属性、查找代码示例和最佳实践，或学习响应式设计模式、深色模式、悬停状态和其他变体时使用。"
+      },
+      "categories": ["frontend", "css", "styling", "tailwind"],
+      "tags": ["前端", "CSS", "开发", "组件库", "UI"],
+      "skill_md_path": "tailwindcss-helper/SKILL.md",
       "is_enabled": true
     }
   ]
