@@ -307,3 +307,4 @@ After installing, provide the user with:
 - If existing project has an icon library, continue using it rather than introducing new ones
 - Default to Lucide for most business scenarios unless specifically justified
 - Document the chosen icon library and standards in project README
+- **在生成 UI 示例时禁止使用 emoji，统一用图标库替代**
