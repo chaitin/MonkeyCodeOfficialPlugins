@@ -330,6 +330,21 @@
       "tags": ["官网", "开发"],
       "skill_md_path": "corporate-website-dev/SKILL.md",
       "is_enabled": true
+    },
+    {
+      "skill_id": "preset-icon-library",
+      "name": {
+        "en": "Preset Icon Library",
+        "zh": "预设图标库"
+      },
+      "description": {
+        "en": "When creating a new frontend project, analyze the product description and automatically install and configure a suitable icon library. Enforces single icon library per project with consistent sizing and stroke width, supports centralized configuration and per-icon overrides.",
+        "zh": "创建新前端项目时，根据产品描述自动分析并安装配置合适的图标库。强制单一项目使用一个图标库，保持统一的尺寸和线宽，支持集中化配置和单个图标覆盖。"
+      },
+      "categories": ["frontend", "icons", "design-systems"],
+      "tags": ["前端", "图标", "UI"],
+      "skill_md_path": "preset-icon-library/SKILL.md",
+      "is_enabled": true
     }
   ]
 }
