@@ -1,6 +1,6 @@
 ---
 name: preset-icon-library
-description: Automatically manage icon libraries - install when creating projects, add missing icons when editing. Avoid using emojis.
+description: Automatically manage icon libraries - install when creating projects, add missing icons when editing. Use when: 1) any icon is needed in UI, 2) AI wants to use emoji instead of icon.
 arguments:
   - name: projectPath
     description: Absolute path to the frontend project directory

@@ -338,8 +338,8 @@
         "zh": "预设图标库"
       },
       "description": {
-        "en": "Automatically manage icon libraries - install when creating projects, add missing icons when editing. Supports multiple style-compatible icon libraries with consistent sizing. Avoid using emojis.",
-        "zh": "自动管理图标库 - 创建项目时安装，编辑时添加缺失图标。支持多个风格兼容的图标库，保持统一的尺寸。避免使用 emoji。"
+        "en": "Automatically manage icon libraries. Use when: 1) any icon is needed in UI, 2) AI wants to use emoji instead of icon.",
+        "zh": "自动管理图标库。触发时机：1) UI 需要图标时，2) AI 想用 emoji 时。"
       },
       "categories": ["frontend", "icons", "design-systems"],
       "tags": ["前端", "图标", "UI"],
