@@ -36,25 +36,52 @@ When creating a new frontend project, automatically select and configure an appr
 
 Based on the business scenario, select the most suitable icon library:
 
+### 1. Comprehensive Giants (Most Recommended)
+
+| Library | Best For | Icons | License |
+|---------|----------|-------|---------|
+| Lucide | Modern, clean UI, most frameworks | 1500+ | MIT |
+| Font Awesome | Enterprise, maximum icon variety | 1600+ (free) | CC BY 4.0 |
+| Material Symbols/Icons | Material Design, variable fonts | 2000+ | Apache 2.0 |
+
+### 2. Designer-Friendly (Figma Friendly)
+
+| Library | Best For | Icons | License |
+|---------|----------|-------|---------|
+| Tabler Icons | SaaS admin, complex dashboards | 5000+ | MIT |
+| Phosphor Icons | Premium design, 6 weights/styles | 700+ | MIT |
+| Heroicons | Tailwind projects, modern web | 300+ | MIT |
+
+### 3. China-Friendly
+
+| Library | Best For | Icons | License |
+|---------|----------|-------|---------|
+| iconfont | Chinese products, icon management | 10000+ | Alibaba |
+| Remix Icon | Balanced, 24x24 grid design | 2000+ | Apache 2.0 |
+
+### 4. Developer Efficiency
+
+| Library | Best For | Icons | License |
+|---------|----------|-------|---------|
+| Iconify | Unified API for all icon libraries | 100000+ | MIT |
+
+### Selection Guide by Scenario
+
 | Business Scenario | Recommended Library | Style | Size | Stroke |
 |-------------------|---------------------|-------|------|--------|
-| Dashboard / Admin / SaaS | Lucide | Outline | 20px | 1.5px |
-| E-commerce / Shopping | Lucide | Outline/Solid | 20px | 1.5px |
+| Dashboard / Admin / SaaS | Tabler Icons | Outline | 20px | 1.5px |
+| E-commerce / Shopping | Lucide / Heroicons | Outline/Solid | 20px | 1.5px |
 | Social / Community | Heroicons | Outline | 20px | 1.5px |
 | Finance / Banking | Lucide | Outline | 20px | 2px |
-| Healthcare / Medical | Lucide | Outline | 20px | 1.5px |
-| Education / Learning | Lucide | Outline | 20px | 1.5px |
+| Healthcare / Medical | Lucide / Phosphor | Outline | 20px | 1.5px |
+| Education / Learning | Lucide / Remix Icon | Outline | 20px | 1.5px |
 | General / Multi-purpose | Lucide | Outline | 20px | 1.5px |
-| Mobile App | Heroicons | Solid/Outline | 24px | 1.5px |
-| Dashboard with data viz | Lucide | Outline | 16px/20px | 1.5px |
+| Mobile App | Heroicons / Ionicons | Solid/Outline | 24px | 1.5px |
+| Dashboard with data viz | Lucide / Tabler | Outline | 16px/20px | 1.5px |
 | Creative / Design | Phosphor | Duotone | 24px | 1.5px |
-
-### Popular Icon Libraries Reference
-
-- **Lucide** - https://lucide.dev (1500+ icons, MIT license)
-- **Heroicons** - https://heroicons.com (By Tailwind CSS team, MIT license)
-- **Tabler Icons** - https://tabler-icons.io (1500+ icons, MIT license)
-- **Phosphor Icons** - https://phosphoricons.com (700+ icons, MIT license)
+| Chinese Product | iconfont / Remix Icon | Outline | 20px | 1.5px |
+| Enterprise/Legacy | Font Awesome | Mixed | 20px | varies |
+| Multi-library needs | Iconify | Unified | varies | varies |
 
 ## Workflow
 
@@ -303,8 +330,8 @@ After installing, provide the user with:
 
 - NEVER allow mixing multiple icon libraries in one project
 - ALWAYS enforce consistent icon size and stroke width across all components
-- **Always use centralized configuration** - create `icon.config.ts` to manage all icon sizes and strokes in one place
+- **Use centralized configuration** - create `icon.config.ts` to manage all icon sizes and strokes in one place
 - If existing project has an icon library, continue using it rather than introducing new ones
-- Default to Lucide for most business scenarios unless specifically justified
+- Select icon library based on business scenario - see the Selection Guide above
 - Document the chosen icon library and standards in project README
 - **在生成 UI 示例时禁止使用 emoji，统一用图标库替代**
