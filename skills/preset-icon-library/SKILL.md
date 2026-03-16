@@ -99,7 +99,49 @@ For a React project with Lucide:
 npm install lucide-react
 ```
 
-Create a centralized icon configuration:
+## Centralized Configuration
+
+Create a configuration file to manage icon sizes and styles in one place:
+
+```ts
+// config/icon.config.ts
+
+export const IconSizes = {
+  xs: 12,
+  sm: 16,
+  md: 20,
+  lg: 24,
+  xl: 32,
+} as const;
+
+export const IconStrokes = {
+  thin: 1,
+  normal: 1.5,
+  bold: 2,
+} as const;
+
+export const IconConfig = {
+  defaultSize: IconSizes.md,
+  defaultStroke: IconStrokes.normal,
+  // Override sizes by usage context
+  sizes: {
+    navigation: IconSizes.md,
+    button: IconSizes.sm,
+    input: IconSizes.sm,
+    table: IconSizes.sm,
+    card: IconSizes.md,
+    heading: IconSizes.lg,
+  },
+  // Override stroke by usage context
+  strokes: {
+    primary: IconStrokes.normal,
+    secondary: IconStrokes.thin,
+    emphasis: IconStrokes.bold,
+  }
+} as const;
+```
+
+Then use in Icons component:
 
 ```tsx
 // components/Icons.tsx
@@ -111,59 +153,59 @@ import {
   Dashboard, Package, Users, CreditCard,
   BarChart3, PieChart, TrendingUp, Calendar
 } from 'lucide-react';
+import { IconConfig } from '@/config/icon.config';
 
-// All icons configured with consistent size and stroke
 export const Icons = {
-  // Navigation
-  Home: (props) => <Home size={20} strokeWidth={1.5} {...props} />,
-  Dashboard: (props) => <Dashboard size={20} strokeWidth={1.5} {...props} />,
-  User: (props) => <User size={20} strokeWidth={1.5} {...props} />,
-  Settings: (props) => <Settings size={20} strokeWidth={1.5} {...props} />,
-  Menu: (props) => <Menu size={20} strokeWidth={1.5} {...props} />,
+  Home: (props) => <Home size={IconConfig.sizes.navigation} strokeWidth={IconConfig.strokes.primary} {...props} />,
+  Dashboard: (props) => <Dashboard size={IconConfig.sizes.navigation} strokeWidth={IconConfig.strokes.primary} {...props} />,
+  User: (props) => <User size={IconConfig.sizes.navigation} strokeWidth={IconConfig.strokes.primary} {...props} />,
+  Settings: (props) => <Settings size={IconConfig.sizes.navigation} strokeWidth={IconConfig.strokes.primary} {...props} />,
+  Menu: (props) => <Menu size={IconConfig.sizes.navigation} strokeWidth={IconConfig.strokes.primary} {...props} />,
   
-  // Actions
-  Search: (props) => <Search size={20} strokeWidth={1.5} {...props} />,
-  Bell: (props) => <Bell size={20} strokeWidth={1.5} {...props} />,
-  Plus: (props) => <Plus size={20} strokeWidth={1.5} {...props} />,
-  Edit: (props) => <Edit size={16} strokeWidth={1.5} {...props} />,
-  Trash: (props) => <Trash size={16} strokeWidth={1.5} {...props} />,
-  Save: (props) => <Save size={16} strokeWidth={1.5} {...props} />,
-  Check: (props) => <Check size={16} strokeWidth={1.5} {...props} />,
-  Eye: (props) => <Eye size={16} strokeWidth={1.5} {...props} />,
+  Search: (props) => <Search size={IconConfig.sizes.navigation} strokeWidth={IconConfig.strokes.primary} {...props} />,
+  Bell: (props) => <Bell size={IconConfig.sizes.navigation} strokeWidth={IconConfig.strokes.primary} {...props} />,
+  Plus: (props) => <Plus size={IconConfig.sizes.card} strokeWidth={IconConfig.strokes.primary} {...props} />,
   
-  // Navigation arrows
-  ChevronDown: (props) => <ChevronDown size={16} strokeWidth={1.5} {...props} />,
-  ChevronRight: (props) => <ChevronRight size={16} strokeWidth={1.5} {...props} />,
+  Edit: (props) => <Edit size={IconConfig.sizes.button} strokeWidth={IconConfig.strokes.primary} {...props} />,
+  Trash: (props) => <Trash size={IconConfig.sizes.button} strokeWidth={IconConfig.strokes.primary} {...props} />,
+  Save: (props) => <Save size={IconConfig.sizes.button} strokeWidth={IconConfig.strokes.primary} {...props} />,
+  Check: (props) => <Check size={IconConfig.sizes.button} strokeWidth={IconConfig.strokes.primary} {...props} />,
+  Eye: (props) => <Eye size={IconConfig.sizes.button} strokeWidth={IconConfig.strokes.primary} {...props} />,
   
-  // Status
-  AlertCircle: (props) => <AlertCircle size={20} strokeWidth={1.5} {...props} />,
-  Info: (props) => <Info size={20} strokeWidth={1.5} {...props} />,
-  Loader2: (props) => <Loader2 size={20} strokeWidth={1.5} {...props} />,
+  ChevronDown: (props) => <ChevronDown size={IconConfig.sizes.button} strokeWidth={IconConfig.strokes.primary} {...props} />,
+  ChevronRight: (props) => <ChevronRight size={IconConfig.sizes.button} strokeWidth={IconConfig.strokes.primary} {...props} />,
   
-  // Business-specific
-  Package: (props) => <Package size={20} strokeWidth={1.5} {...props} />,
-  Users: (props) => <Users size={20} strokeWidth={1.5} {...props} />,
-  CreditCard: (props) => <CreditCard size={20} strokeWidth={1.5} {...props} />,
-  BarChart3: (props) => <BarChart3 size={20} strokeWidth={1.5} {...props} />,
-  PieChart: (props) => <PieChart size={20} strokeWidth={1.5} {...props} />,
-  TrendingUp: (props) => <TrendingUp size={20} strokeWidth={1.5} {...props} />,
-  Calendar: (props) => <Calendar size={20} strokeWidth={1.5} {...props} />,
+  AlertCircle: (props) => <AlertCircle size={IconConfig.sizes.card} strokeWidth={IconConfig.strokes.primary} {...props} />,
+  Info: (props) => <Info size={IconConfig.sizes.card} strokeWidth={IconConfig.strokes.primary} {...props} />,
+  Loader2: (props) => <Loader2 size={IconConfig.sizes.card} strokeWidth={IconConfig.strokes.primary} {...props} />,
+  
+  Package: (props) => <Package size={IconConfig.sizes.card} strokeWidth={IconConfig.strokes.primary} {...props} />,
+  Users: (props) => <Users size={IconConfig.sizes.card} strokeWidth={IconConfig.strokes.primary} {...props} />,
+  CreditCard: (props) => <CreditCard size={IconConfig.sizes.card} strokeWidth={IconConfig.strokes.primary} {...props} />,
+  BarChart3: (props) => <BarChart3 size={IconConfig.sizes.card} strokeWidth={IconConfig.strokes.primary} {...props} />,
+  PieChart: (props) => <PieChart size={IconConfig.sizes.card} strokeWidth={IconConfig.strokes.primary} {...props} />,
+  TrendingUp: (props) => <TrendingUp size={IconConfig.sizes.card} strokeWidth={IconConfig.strokes.primary} {...props} />,
+  Calendar: (props) => <Calendar size={IconConfig.sizes.card} strokeWidth={IconConfig.strokes.primary} {...props} />,
 };
 ```
+
+All icons configured with consistent size and stroke
 
 ## Output
 
 After installing, provide the user with:
 
 1. **Selected icon library** and business scenario rationale
-2. **Standard icon configuration** (size, stroke width)
-3. **Centralized icon component** for consistent usage
-4. **Usage guidelines** - enforce single library and consistent styling
+2. **Centralized icon configuration file** (`icon.config.ts` or similar)
+3. **Standard icon configuration** (size, stroke width)
+4. **Centralized icon component** for consistent usage
+5. **Usage guidelines** - enforce single library and consistent styling
 
 ## Notes
 
 - NEVER allow mixing multiple icon libraries in one project
 - ALWAYS enforce consistent icon size and stroke width across all components
+- **Always use centralized configuration** - create `icon.config.ts` to manage all icon sizes and strokes in one place
 - If existing project has an icon library, continue using it rather than introducing new ones
 - Default to Lucide for most business scenarios unless specifically justified
 - Document the chosen icon library and standards in project README
