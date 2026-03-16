@@ -1,408 +1,88 @@
 ---
 name: preset-icon-library
-description: Automatically manage icon libraries for frontend projects - install when creating new projects, and add missing icons when editing existing projects without emojis.
+description: Automatically manage icon libraries - install when creating projects, add missing icons when editing. Never use emojis.
 arguments:
   - name: projectPath
     description: Absolute path to the frontend project directory
     required: true
   - name: productDescription
-    description: Brief description of the product/app type to help select the appropriate icon library
-    required: false
-  - name: iconName
-    description: Name of the icon needed (e.g., "user", "settings", "shopping-cart")
+    description: Brief description of the product/app type
     required: false
 ---
 
 # Preset Icon Library
 
-Automatically manage icon libraries for frontend projects:
-1. **When creating new projects** - Analyze business scenario and install suitable icon library
-2. **When editing existing projects** - Find or add missing icons without using emojis
+## Core Rules
 
-## Core Rules (MUST FOLLOW)
-
-1. **Single Icon Library Per Project** - Only ONE icon library allowed in a project. Never mix multiple icon libraries.
-
-2. **Business Scenario Based Selection** - Icon style must match the business scenario:
-   - Dashboard/Admin: Professional, clean, data-oriented
-   - E-commerce: Clear, commerce-focused, trustworthy
-   - Social/Community: Friendly, approachable, warm
-   - Finance/Banking: Professional, serious, trustworthy
-   - Healthcare: Clean, medical-standard, empathetic
-   - Education: Modern, accessible, encouraging
-   - Creative/Design: Unique, artistic, distinctive
-
-3. **Consistent Icon Properties** - All icons must maintain:
-   - Same size (e.g., 20px or 24px standard)
-   - Same stroke width/line weight (e.g., 1.5px or 2px)
-   - Same style (outline vs solid vs duotone)
+1. **Single Icon Library** - One library per project, never mix
+2. **Business Scenario Based** - Match icon style to project type
+3. **Consistent Sizing** - Same size and stroke width across all icons
 
 ## Workflow
 
-### Scenario 1: Creating New Project
+### Creating New Project
 
-1. **Analyze the business scenario** from product description to determine the best icon library and style
-2. **Detect the frontend framework** to determine the correct installation method
-3. **Install the icon library** using the appropriate package manager
-4. **Create icon configuration** with consistent size and stroke settings
-5. **Provide usage guidelines** ensuring all icons follow the same standards
+1. Analyze business scenario → select appropriate icon library
+2. Detect frontend framework → install via npm/yarn/pnpm
+3. Create centralized icon config with consistent size/stroke
 
-### Scenario 2: Adding Missing Icons to Existing Project
+### Adding Missing Icons
 
-When editing code and needing an icon that doesn't exist in the project:
+1. Check `package.json` for existing icon library
+2. If exists: find similar icon in same library
+3. If not: install style-compatible library, use closest match
+4. Add to Icons component, never use emoji as fallback
 
-1. **Check existing icon library** - Look at `package.json` to see if any icon library is already installed
+### Icon Library Selection
 
-2. **If icon library exists**:
-   - Search the installed library for a similar icon name
-   - If found, use that icon
-   - If not found, find an alternative icon with similar meaning from the same library
+| Scenario | Recommended |
+|----------|-------------|
+| Dashboard / Admin | Tabler Icons, Lucide |
+| E-commerce | Lucide, Heroicons |
+| Social / Community | Heroicons |
+| Finance / Banking | Lucide |
+| Healthcare | Lucide, Phosphor |
+| Mobile App | Heroicons, Ionicons |
+| Creative / Design | Phosphor |
+| Chinese Product | iconfont, Remix Icon |
+| General / Default | Lucide |
 
-3. **If no icon library installed**:
-   - Analyze project style (check UI framework, design tokens, existing components)
-   - Install appropriate icon library based on project style
-   - Select the closest matching icon from the new library
+### Common Libraries
 
-4. **Add icon to centralized Icons component**:
-   - Import the new icon
-   - Add to Icons.tsx with consistent size/stroke configuration
+- **Lucide** - https://lucide.dev (1500+, modern, MIT)
+- **Tabler Icons** - https://tabler-icons.io (5000+, MIT)
+- **Heroicons** - https://heroicons.com (300+, Tailwind, MIT)
+- **Phosphor** - https://phosphoricons.com (700+, premium, MIT)
+- **iconfont** - https://www.iconfont.cn (10000+, Alibaba)
+- **Remix Icon** - https://remixicon.com (2000+, MIT)
 
-5. **Never use emoji as fallback** - Always find a suitable icon from the library
+## Icon Configuration
 
-#### Icon Search Priority
-
-| Priority | Action |
-|----------|--------|
-| 1 | Same icon name in installed library |
-| 2 | Semantic alternative in same library |
-| 3 | Icon from style-compatible library (if no library installed) |
-| 4 | Create simple SVG inline (only if absolutely necessary) |
-
-#### Example: Adding Missing Icon
-
-```bash
-# Scenario: Project uses Lucide, need "analytics" icon but only "chart" exists
-
-# Step 1: Check installed library
-grep "lucide" package.json
-# Found: "lucide-react": "^0.300.0"
-
-# Step 2: Search for similar icon in Lucide
-# - BarChart3, PieChart, TrendingUp, Activity
-# - Use "Activity" for analytics/metrics concept
-
-# Step 3: Add to Icons.tsx
-import { Activity } from 'lucide-react';
-
-// Add to Icons object with consistent styling
-export const Icons = {
-  // ... existing icons
-  Activity: (props) => (
-    <Activity size={IconConfig.sizes.card} strokeWidth={IconConfig.strokes.primary} {...props} />
-  ),
-};
-```
-
-## Icon Library Options
-
-Based on the business scenario, select the most suitable icon library:
-
-### 1. Comprehensive Giants (Most Recommended)
-
-| Library | Best For | Icons | License |
-|---------|----------|-------|---------|
-| Lucide | Modern, clean UI, most frameworks | 1500+ | MIT |
-| Font Awesome | Enterprise, maximum icon variety | 1600+ (free) | CC BY 4.0 |
-| Material Symbols/Icons | Material Design, variable fonts | 2000+ | Apache 2.0 |
-
-### 2. Designer-Friendly (Figma Friendly)
-
-| Library | Best For | Icons | License |
-|---------|----------|-------|---------|
-| Tabler Icons | SaaS admin, complex dashboards | 5000+ | MIT |
-| Phosphor Icons | Premium design, 6 weights/styles | 700+ | MIT |
-| Heroicons | Tailwind projects, modern web | 300+ | MIT |
-
-### 3. China-Friendly
-
-| Library | Best For | Icons | License |
-|---------|----------|-------|---------|
-| iconfont | Chinese products, icon management | 10000+ | Alibaba |
-| Remix Icon | Balanced, 24x24 grid design | 2000+ | Apache 2.0 |
-
-### 4. Developer Efficiency
-
-| Library | Best For | Icons | License |
-|---------|----------|-------|---------|
-| Iconify | Unified API for all icon libraries | 100000+ | MIT |
-
-### Selection Guide by Scenario
-
-| Business Scenario | Recommended Library | Style | Size | Stroke |
-|-------------------|---------------------|-------|------|--------|
-| Dashboard / Admin / SaaS | Tabler Icons | Outline | 20px | 1.5px |
-| E-commerce / Shopping | Lucide / Heroicons | Outline/Solid | 20px | 1.5px |
-| Social / Community | Heroicons | Outline | 20px | 1.5px |
-| Finance / Banking | Lucide | Outline | 20px | 2px |
-| Healthcare / Medical | Lucide / Phosphor | Outline | 20px | 1.5px |
-| Education / Learning | Lucide / Remix Icon | Outline | 20px | 1.5px |
-| General / Multi-purpose | Lucide | Outline | 20px | 1.5px |
-| Mobile App | Heroicons / Ionicons | Solid/Outline | 24px | 1.5px |
-| Dashboard with data viz | Lucide / Tabler | Outline | 16px/20px | 1.5px |
-| Creative / Design | Phosphor | Duotone | 24px | 1.5px |
-| Chinese Product | iconfont / Remix Icon | Outline | 20px | 1.5px |
-| Enterprise/Legacy | Font Awesome | Mixed | 20px | varies |
-| Multi-library needs | Iconify | Unified | varies | varies |
-
-## Workflow
-
-1. **Analyze the business scenario** from product description to determine the best icon library and style
-
-2. **Check existing icon usage** - If the project already has an icon library installed, continue using it instead of adding a new one
-
-3. **Detect the frontend framework** to determine the correct installation method
-
-4. **Install the icon library** using the appropriate package manager
-
-5. **Create icon configuration** with consistent size and stroke settings
-
-6. **Provide usage guidelines** ensuring all icons follow the same standards
-
-## Icon Configuration Standards
-
-### Size Standards
-
-| Usage Context | Recommended Size |
-|--------------|------------------|
-| Navigation menu | 20px |
-| Buttons | 16px or 20px |
-| Form inputs | 16px |
-| Data tables | 16px |
-| Cards/Widgets | 20px |
-| Headers/Page titles | 24px |
-
-### Stroke Width Standards
-
-| Style | Recommended Stroke |
-|-------|-------------------|
-| Standard outline | 1.5px |
-| Heavy/Emphasis | 2px |
-| Subtle/Secondary | 1px |
-
-### Implementation Example
-
-For a React project with Lucide:
-
-```bash
-npm install lucide-react
-```
-
-## Centralized Configuration with Override Support
-
-Create a configuration file to manage icon sizes and styles in one place, with support for per-icon overrides:
+Create `config/icon.config.ts`:
 
 ```ts
-// config/icon.config.ts
-
-export const IconSizes = {
-  xs: 12,
-  sm: 16,
-  md: 20,
-  lg: 24,
-  xl: 32,
-} as const;
-
-export const IconStrokes = {
-  thin: 1,
-  normal: 1.5,
-  bold: 2,
-} as const;
-
 export const IconConfig = {
-  defaultSize: IconSizes.md,
-  defaultStroke: IconStrokes.normal,
-  
-  // Default sizes by usage context
-  sizes: {
-    navigation: IconSizes.md,
-    button: IconSizes.sm,
-    input: IconSizes.sm,
-    table: IconSizes.sm,
-    card: IconSizes.md,
-    heading: IconSizes.lg,
-  },
-  
-  // Default strokes by usage context
-  strokes: {
-    primary: IconStrokes.normal,
-    secondary: IconStrokes.thin,
-    emphasis: IconStrokes.bold,
-  },
-  
-  // Per-icon overrides (optional)
-  overrides: {
-    // Custom size for specific icons
-    Home: { size: IconSizes.lg },
-    Search: { size: IconSizes.sm },
-    Loader2: { size: IconSizes.lg },
-    // Custom stroke for specific icons
-    AlertCircle: { stroke: IconStrokes.bold },
-    // Custom both size and stroke
-    Check: { size: IconSizes.xs, stroke: IconStrokes.bold },
-  } as Record<string, { size?: number; stroke?: number }>,
+  defaultSize: 20,
+  defaultStroke: 1.5,
+  sizes: { navigation: 20, button: 16, card: 20, heading: 24 },
+  strokes: { primary: 1.5, emphasis: 2 },
 } as const;
 ```
 
-Helper function to resolve icon props with override support:
-
-```ts
-// config/icon.config.ts (continued)
-
-type IconName = keyof typeof IconConfig.overrides;
-
-export function getIconProps(name: IconName, contextSize: number, contextStroke: number) {
-  const override = IconConfig.overrides[name];
-  if (!override) {
-    return { size: contextSize, strokeWidth: contextStroke };
-  }
-  return {
-    size: override.size ?? contextSize,
-    strokeWidth: override.stroke ?? contextStroke,
-  };
-}
-```
-
-Then use in Icons component:
+Use in icons component:
 
 ```tsx
-// components/Icons.tsx
-import { 
-  Home, User, Settings, Search, Bell, 
-  Menu, X, ChevronDown, ChevronRight,
-  Plus, Edit, Trash, Save, Check,
-  Loader2, AlertCircle, Info, Eye,
-  Dashboard, Package, Users, CreditCard,
-  BarChart3, PieChart, TrendingUp, Calendar
-} from 'lucide-react';
-import { IconConfig, getIconProps } from '@/config/icon.config';
+import { SomeIcon } from 'lucide-react';
+import { IconConfig } from '@/config/icon.config';
 
 export const Icons = {
-  Home: (props) => {
-    const { size, strokeWidth } = getIconProps('Home', IconConfig.sizes.navigation, IconConfig.strokes.primary);
-    return <Home size={size} strokeWidth={strokeWidth} {...props} />;
-  },
-  Dashboard: (props) => (
-    <Dashboard size={IconConfig.sizes.navigation} strokeWidth={IconConfig.strokes.primary} {...props} />
-  ),
-  User: (props) => (
-    <User size={IconConfig.sizes.navigation} strokeWidth={IconConfig.strokes.primary} {...props} />
-  ),
-  Settings: (props) => (
-    <Settings size={IconConfig.sizes.navigation} strokeWidth={IconConfig.strokes.primary} {...props} />
-  ),
-  Menu: (props) => (
-    <Menu size={IconConfig.sizes.navigation} strokeWidth={IconConfig.strokes.primary} {...props} />
-  ),
-  
-  Search: (props) => {
-    const { size, strokeWidth } = getIconProps('Search', IconConfig.sizes.navigation, IconConfig.strokes.primary);
-    return <Search size={size} strokeWidth={strokeWidth} {...props} />;
-  },
-  Bell: (props) => (
-    <Bell size={IconConfig.sizes.navigation} strokeWidth={IconConfig.strokes.primary} {...props} />
-  ),
-  Plus: (props) => (
-    <Plus size={IconConfig.sizes.card} strokeWidth={IconConfig.strokes.primary} {...props} />
-  ),
-  
-  Edit: (props) => (
-    <Edit size={IconConfig.sizes.button} strokeWidth={IconConfig.strokes.primary} {...props} />
-  ),
-  Trash: (props) => (
-    <Trash size={IconConfig.sizes.button} strokeWidth={IconConfig.strokes.primary} {...props} />
-  ),
-  Save: (props) => (
-    <Save size={IconConfig.sizes.button} strokeWidth={IconConfig.strokes.primary} {...props} />
-  ),
-  Check: (props) => {
-    const { size, strokeWidth } = getIconProps('Check', IconConfig.sizes.button, IconConfig.strokes.primary);
-    return <Check size={size} strokeWidth={strokeWidth} {...props} />;
-  },
-  Eye: (props) => (
-    <Eye size={IconConfig.sizes.button} strokeWidth={IconConfig.strokes.primary} {...props} />
-  ),
-  
-  ChevronDown: (props) => (
-    <ChevronDown size={IconConfig.sizes.button} strokeWidth={IconConfig.strokes.primary} {...props} />
-  ),
-  ChevronRight: (props) => (
-    <ChevronRight size={IconConfig.sizes.button} strokeWidth={IconConfig.strokes.primary} {...props} />
-  ),
-  
-  AlertCircle: (props) => {
-    const { size, strokeWidth } = getIconProps('AlertCircle', IconConfig.sizes.card, IconConfig.strokes.primary);
-    return <AlertCircle size={size} strokeWidth={strokeWidth} {...props} />;
-  },
-  Info: (props) => (
-    <Info size={IconConfig.sizes.card} strokeWidth={IconConfig.strokes.primary} {...props} />
-  ),
-  Loader2: (props) => {
-    const { size, strokeWidth } = getIconProps('Loader2', IconConfig.sizes.card, IconConfig.strokes.primary);
-    return <Loader2 size={size} strokeWidth={strokeWidth} {...props} />;
-  },
-  
-  Package: (props) => (
-    <Package size={IconConfig.sizes.card} strokeWidth={IconConfig.strokes.primary} {...props} />
-  ),
-  Users: (props) => (
-    <Users size={IconConfig.sizes.card} strokeWidth={IconConfig.strokes.primary} {...props} />
-  ),
-  CreditCard: (props) => (
-    <CreditCard size={IconConfig.sizes.card} strokeWidth={IconConfig.strokes.primary} {...props} />
-  ),
-  BarChart3: (props) => (
-    <BarChart3 size={IconConfig.sizes.card} strokeWidth={IconConfig.strokes.primary} {...props} />
-  ),
-  PieChart: (props) => (
-    <PieChart size={IconConfig.sizes.card} strokeWidth={IconConfig.strokes.primary} {...props} />
-  ),
-  TrendingUp: (props) => (
-    <TrendingUp size={IconConfig.sizes.card} strokeWidth={IconConfig.strokes.primary} {...props} />
-  ),
-  Calendar: (props) => (
-    <Calendar size={IconConfig.sizes.card} strokeWidth={IconConfig.strokes.primary} {...props} />
-  ),
+  SomeIcon: (props) => <SomeIcon size={IconConfig.sizes.card} strokeWidth={IconConfig.defaultStroke} {...props} />,
 };
 ```
-
-Override usage: Add entries in `IconConfig.overrides` to customize specific icons:
-
-```ts
-overrides: {
-  Home: { size: IconSizes.lg },      // Custom size only
-  AlertCircle: { stroke: IconStrokes.bold },  // Custom stroke only
-  Check: { size: IconSizes.xs, stroke: IconStrokes.bold },  // Custom both
-}
-```
-
-All icons configured with consistent size and stroke
-
-## Output
-
-After installing, provide the user with:
-
-1. **Selected icon library** and business scenario rationale
-2. **Centralized icon configuration file** (`icon.config.ts` or similar)
-3. **Standard icon configuration** (size, stroke width)
-4. **Centralized icon component** for consistent usage
-5. **Usage guidelines** - enforce single library and consistent styling
 
 ## Notes
 
-- NEVER allow mixing multiple icon libraries in one project
-- ALWAYS enforce consistent icon size and stroke width across all components
-- **Use centralized configuration** - create `icon.config.ts` to manage all icon sizes and strokes in one place
-- If existing project has an icon library, continue using it rather than introducing new ones
-- Select icon library based on business scenario - see the Selection Guide above
-- Document the chosen icon library and standards in project README
+- Never mix icon libraries in one project
+- Use centralized config for consistent sizing
+- If project has existing icon library, continue using it
 - **Never use emojis in UI examples - always use the icon library instead**
