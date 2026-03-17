@@ -1,6 +1,6 @@
 ---
 name: icon-library-manager
-description: "智能图标库管家：负责前端项目图标库的选型、安装及标准化引用。核心任务：消除 UI 中的 emoji，确保图标风格统一。"
+description: "自动管理图标库 - 创建项目时安装图标库，编辑时添加缺失图标。触发时机：1) UI 需要图标时；2) AI 想用或输出 emoji 时（必须提醒并用图标替代）。"
 arguments:
   - name: projectPath
     description: 前端项目根目录的绝对路径
