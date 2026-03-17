@@ -14,7 +14,7 @@ arguments:
 ---
 
 # 什么时候用
-1) UI 需要图标/icon/小图标/品牌标识/按钮前加图标/列表项带图标时；2) AI 想用或输出 emoji 时（必须提醒并用图标替代）。
+1) UI 需要图标/icon/小图标/品牌标识/按钮前加图标/列表项带图标时；2) AI 想用或输出 emoji 时（必须提醒并用图标替代）；3) 数据展示页面（表格、统计视图、Dashboard）需要通过图标提升视觉效果时。
 
 # 核心能力与工作流
 
@@ -43,13 +43,3 @@ arguments:
 - **禁用 Emoji**：严禁在 UI 渲染逻辑中硬编码 Emoji。
 - **禁止手写 SVG**：严禁自己编写 SVG 代码代替图标库图标。必须先检查已安装图标库是否有匹配图标，如有则使用；如确实没有，再安装新的图标库。
 - **优先使用图标库**：所有图标需求必须走图标库流程，禁止用 SVG inline 方式绕过。
-- **统一导出规范**：
-  ```tsx
-  // 推荐：集中管理，方便全局替换尺寸和线宽
-  import { LucideProps, Settings, User, Bell } from 'lucide-react';
-
-  export const Icon = {
-    Settings: (props: LucideProps) => <Settings size={20} strokeWidth={1.5} {...props} />,
-    User: (props: LucideProps) => <User size={20} strokeWidth={1.5} {...props} />,
-  };
-  ```
