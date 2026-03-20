@@ -1,6 +1,7 @@
 ---
 name: seedance-prompt
-description: "将剧本、小说或分镜脚本转化为即梦Seedance 2.0视频提示词。当用户需要：(1) 将剧本/小说/分镜脚本转为AI视频提示词 (2) 生成Seedance 2.0可用的镜头描述 (3) 切分视频片段并生成prompt时触发。"
+description: "将剧本、小说或分镜脚本转化为即梦Seedance 2.0视频提示词。当用户需要：(1) 将剧本/小说/分镜脚本转为AI视频提示词 (2) 生成Seedance 2.0可用的镜头描述 (3) 切分视频片段并生成prompt时触发。此skill完全在本地运行，不依赖任何外部服务。"
+license: MIT
 ---
 
 # 即梦Seedance 2.0 视频提示词生成器
@@ -34,7 +35,7 @@ description: "将剧本、小说或分镜脚本转化为即梦Seedance 2.0视频
      3. 保持叙事完整性
      4. 单片段多镜头时合理分配时长（不平均分配，根据内容需要）
 
-## 输出格式（无空行）
+## 输出格式
 
 ```
 视觉风格 [风格关键词，逗号分隔]
@@ -58,21 +59,13 @@ description: "将剧本、小说或分镜脚本转化为即梦Seedance 2.0视频
 5. **氛围关键词**：情绪词 + 电影参考（可选）
 6. **技术参数**：cinematic, 8k, film grain, shallow depth of field, high contrast lighting, professional color grading
 
-## 景别术语
+## 景别与镜头术语
 
-Extreme Wide Shot (EWS) / 大远景, Wide Shot (WS) / 远景, Full Shot (FS) / 全景, Medium Shot (MS) / 中景, Medium Close-Up (MCU) / 中近景, Close-Up (CU) / 特写, Extreme Close-Up (ECU) / 大特写
-
-## 镜头运动术语
-
-static shot（固定）, push in / dolly in（推）, pull out / dolly out（拉）, pan left/right（摇）, follow shot / tracking shot（跟）, crane up / elevating shot（升）, crane down / descending shot（降）, orbit / circling around（环绕）
+详见 [references/terms.md](references/terms.md)
 
 ## 竖屏构图要求
 
 9:16比例时强调：vertical composition, centered or lower third composition, background layers
-
-## 技术参数固定标签
-
-每个prompt末尾添加：cinematic, 8k, film grain, shallow depth of field, high contrast lighting, professional color grading
 
 ## 示例
 
@@ -104,3 +97,7 @@ static shot（固定）, push in / dolly in（推）, pull out / dolly out（拉
 - 资产引用格式：@资产名，**仅在首次出现时引用**，后续自然衔接不重复引用
 - **禁止使用你我他/她/它等人称代词**，必须使用 @资产 格式指定
 - **场景转换必须切换新的片段**
+
+## 辅助脚本
+
+- `scripts/generate_prompt.py` - 命令行批量生成工具
