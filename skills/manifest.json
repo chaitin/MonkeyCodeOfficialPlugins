@@ -330,6 +330,21 @@
       "tags": ["官网", "开发"],
       "skill_md_path": "corporate-website-dev/SKILL.md",
       "is_enabled": true
+    },
+    {
+      "skill_id": "pua",
+      "name": {
+        "en": "PUA Mode - High-Agency Agent",
+        "zh": "PUA 我们不养闲 Agent"
+      },
+      "description": {
+        "en": "Forces high-agency exhaustive problem-solving with corporate PUA pressure escalation. Use when AI is passive, gives up easily, not verifying results, or producing low-quality work. Triggers on user frustration, quality complaints, repeated failures, or when agent needs motivation.",
+        "zh": "用大厂 PUA 压力 escalation 驱动高主动性、穷尽式解决问题。适用于 AI 消极、轻易放弃、不验证结果或产出质量差时。触发场景：用户说加油/别偷懒/质量太差/重新做、反复失败、或需要激励时。"
+      },
+      "categories": ["workflow", "quality", "motivation"],
+      "tags": ["PUA"],
+      "skill_md_path": "pua/SKILL.md",
+      "is_enabled": true
     }
   ]
 }
