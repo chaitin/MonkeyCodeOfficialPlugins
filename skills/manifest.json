@@ -103,7 +103,7 @@
       },
       "categories": ["linting", "formatting", "ci"],
       "tags": ["开发"],
-      "skill_md_path": "react-code-fix-linter/SKILL.md",
+      "skill_md_path": "fix/SKILL.md",
       "is_enabled": true
     },
     {
@@ -118,7 +118,7 @@
       },
       "categories": ["react-native", "mobile", "styling", "navigation", "animation"],
       "tags": ["前端", "设计", "开发"],
-      "skill_md_path": "react-native-ui-animation/SKILL.md",
+      "skill_md_path": "react-native-design/SKILL.md",
       "is_enabled": true
     },
     {
@@ -133,7 +133,7 @@
       },
       "categories": ["security", "authentication", "api", "vulnerabilities"],
       "tags": ["安全", "审查"],
-      "skill_md_path": "security-review-audit/SKILL.md",
+      "skill_md_path": "security-review/SKILL.md",
       "is_enabled": true
     },
     {
@@ -148,7 +148,7 @@
       },
       "categories": ["components", "react", "vue", "svelte", "css-in-js"],
       "tags": ["设计", "前端"],
-      "skill_md_path": "web-component-design-architecture/SKILL.md",
+      "skill_md_path": "web-component-design/SKILL.md",
       "is_enabled": true
     },
     {
@@ -404,6 +404,69 @@
       "categories": ["workflow", "quality", "motivation"],
       "tags": ["PUA"],
       "skill_md_path": "pua/SKILL.md",
+      "is_enabled": true
+    },
+    {
+      "skill_id": "design-review",
+      "name": {"en": "Design Review", "zh": "设计审查"},
+      "description": {"en": "Evidence-based rendered UI audit, scored quality gate, and bounded fix loop.", "zh": "基于渲染证据的 UI 审查、评分门禁和有限修正流程。"},
+      "categories": ["design", "review", "quality"],
+      "tags": ["设计", "审查", "UI"],
+      "skill_md_path": "design-review/SKILL.md",
+      "is_enabled": true
+    },
+    {
+      "skill_id": "plan-design-review",
+      "name": {"en": "Plan Design Review", "zh": "设计方案审查"},
+      "description": {"en": "Score a design plan, define product-specific quality targets, and produce prioritized acceptance criteria.", "zh": "为设计方案评分、定义产品专属质量目标并输出优先验收标准。"},
+      "categories": ["design", "planning", "review"],
+      "tags": ["设计", "计划", "审查"],
+      "skill_md_path": "plan-design-review/SKILL.md",
+      "is_enabled": true
+    },
+    {
+      "skill_id": "review-animations",
+      "name": {"en": "Review Animations", "zh": "动效审查"},
+      "description": {"en": "Review motion purpose, timing, easing, performance, interruptibility, and accessibility.", "zh": "审查动效目的、时序、缓动、性能、可中断性和无障碍。"},
+      "categories": ["design", "animation", "review"],
+      "tags": ["动效", "审查", "前端"],
+      "skill_md_path": "review-animations/SKILL.md",
+      "is_enabled": true
+    },
+    {
+      "skill_id": "pr-feedback-quality-gate",
+      "name": {"en": "PR Feedback Quality Gate", "zh": "PR 反馈质量门禁"},
+      "description": {"en": "Resolve PR feedback with scoped fixes, validation, and read-only cross-review.", "zh": "通过范围受控的修正、验证和只读交叉审查处理 PR 反馈。"},
+      "categories": ["workflow", "code-review", "quality"],
+      "tags": ["PR", "审查", "质量"],
+      "skill_md_path": "pr-feedback-quality-gate/SKILL.md",
+      "is_enabled": true
+    },
+    {
+      "skill_id": "headless-design-jury",
+      "name": {"en": "Headless Design Jury", "zh": "无头设计评审团"},
+      "description": {"en": "Run five read-only design subreviews and submit every bounded round through DesignJurySubmit.", "zh": "运行五个只读设计子评审，并在每个有限轮次调用 DesignJurySubmit。"},
+      "categories": ["design", "review", "workflow"],
+      "tags": ["设计", "评审", "质量"],
+      "skill_md_path": "headless-design-jury/SKILL.md",
+      "is_enabled": true
+    },
+    {
+      "skill_id": "slides",
+      "name": {"en": "Slides", "zh": "演示文稿"},
+      "description": {"en": "Create a 16:9 HTML deck, export a high-fidelity image-based PPTX, and require a fidelity audit.", "zh": "创建 16:9 HTML 演示稿、导出高保真整页图像 PPTX，并强制进行保真审计。"},
+      "categories": ["presentation", "design", "export"],
+      "tags": ["PPT", "HTML", "演示"],
+      "skill_md_path": "slides/SKILL.md",
+      "is_enabled": true
+    },
+    {
+      "skill_id": "pptx-html-fidelity-audit",
+      "name": {"en": "PPTX HTML Fidelity Audit", "zh": "PPTX HTML 保真审计"},
+      "description": {"en": "Audit and repair layout, content, and typography drift between an HTML deck and PPTX export.", "zh": "审计并修复 HTML 演示稿和 PPTX 导出之间的布局、内容与字体偏差。"},
+      "categories": ["presentation", "quality", "audit"],
+      "tags": ["PPT", "审计", "保真"],
+      "skill_md_path": "pptx-html-fidelity-audit/SKILL.md",
       "is_enabled": true
     }
   ]

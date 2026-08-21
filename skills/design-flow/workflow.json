@@ -1,0 +1,1911 @@
+{
+  "version": 2,
+  "write_policies": {
+    "product": {
+      "product": true
+    }
+  },
+  "routes": [
+    {
+      "id": "new-web",
+      "description": "Create a new Web interface",
+      "steps": [
+        {
+          "id": "brief",
+          "description": "Establish the implementation-ready brief",
+          "skills": [
+            "design-generation"
+          ],
+          "instructions": "Before any other work, allocate this workflow run's immutable run directory. Inspect only direct child directories of .ohmyagent/design whose complete name matches ^v([1-9]\\d*)$; ignore files, nested directories, v0, leading-zero names, and every other name. Set N to one more than the largest captured decimal number, or 1 when there are no matches, and create exactly .ohmyagent/design/vN with a create-new operation that fails if it already exists. Never overwrite, reuse, delete, or merge an existing version directory; if creation races or the target exists, rescan and allocate a newer number. Record the exact path as RUN_DIRECTORY in this step's evidence so every later step in this route reuses it without rescanning or reallocating. Inspect the repository and resolve only material ambiguity. Record the brief as evidence.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "image-capability"
+            }
+          }
+        },
+        {
+          "id": "image-capability",
+          "description": "Detect image-generation MCP capability",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Inspect the tools available to this session and use ToolSearch when needed to discover MCP image generation capabilities. Treat this capability as available only when at least one callable MCP text-to-image tool exists; image analysis, image editing without text-to-image, and non-MCP tools do not qualify. Complete this step with outcome available and evidence naming the callable tool, or outcome unavailable and evidence that no qualifying tool exists. Do not generate images or recommend templates in this step.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "available": "art-direction",
+              "unavailable": "template-cards"
+            }
+          }
+        },
+        {
+          "id": "template-cards",
+          "description": "Present real template cards",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Call DesignTemplateCatalog with short brief-relevant keywords to retrieve real current template candidates; if fewer than three match, broaden the query. For the chosen three candidates, call DesignSavePreview with each exact preview_url and a distinct path below RUN_DIRECTORY/template-previews/, then call DesignSelectCards in template mode with those workspace previews. Pass each exact detail_url returned by DesignTemplateCatalog as templateRef; never derive it from the title or template ID. Do not output the full catalog, infer selection, or silently skip recommendation.",
+          "write_policy": "product",
+          "transitions": {
+            "tools": [
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "select",
+                "target": "template-artifact"
+              },
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "next",
+                "target": "template-cards"
+              },
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "skip",
+                "target": "direct-thesis"
+              },
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "cancel",
+                "target": "cancelled"
+              }
+            ]
+          },
+          "unavailable_target": "template-question"
+        },
+        {
+          "id": "template-question",
+          "description": "Select a template without visual cards",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Call DesignTemplateCatalog with brief-relevant keywords and retain the exact detail_url for the three strongest candidates. Save each candidate's exact preview_url with DesignSavePreview to a distinct path below RUN_DIRECTORY/template-previews/ before presenting it. Then call AskUserQuestion with exactly one single-select question using these exact labels: Template 1, Template 2, Template 3, More actions. Put each candidate title, concise rationale, and recommended marker when applicable in its matching option description. Preserve the numbered-label to exact detail_url mapping for template-artifact; never derive a URL from a title or template ID. If the user answers with free text and no automatic tool transition occurs, interpret an unambiguous answer and call Workflow complete_step with the matching outcome template-1, template-2, template-3, actions, next, skip, or cancel; ask again when ambiguous.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "template-1": "template-artifact",
+              "template-2": "template-artifact",
+              "template-3": "template-artifact",
+              "actions": "template-actions",
+              "next": "template-question",
+              "skip": "direct-thesis",
+              "cancel": "cancelled"
+            },
+            "tools": [
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Template 1",
+                "target": "template-artifact"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Template 2",
+                "target": "template-artifact"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Template 3",
+                "target": "template-artifact"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "More actions",
+                "target": "template-actions"
+              }
+            ]
+          },
+          "unavailable_target": "template-default"
+        },
+        {
+          "id": "template-actions",
+          "description": "Choose a template fallback action",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Call AskUserQuestion with exactly one single-select question using these exact labels: Show different templates, Continue without a template, Cancel. If the user answers with free text and no automatic tool transition occurs, interpret an unambiguous answer and call Workflow complete_step with outcome next, skip, or cancel; ask again when ambiguous.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "next": "template-question",
+              "skip": "direct-thesis",
+              "cancel": "cancelled"
+            },
+            "tools": [
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Show different templates",
+                "target": "template-question"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Continue without a template",
+                "target": "direct-thesis"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Cancel",
+                "target": "cancelled"
+              }
+            ]
+          },
+          "unavailable_target": "template-default"
+        },
+        {
+          "id": "template-artifact",
+          "description": "Persist and inspect selected template artifact",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Call DesignTemplateArtifact with the exact templateRef associated with the user's DesignSelectCards or AskUserQuestion selection; never reconstruct a URL from templateId, title, or numbered label. Call DesignTemplateArtifact with path RUN_DIRECTORY/DESIGN.md so the complete Chinese prompt is written atomically into this run's version directory. Read RUN_DIRECTORY/DESIGN.md back and verify it is non-empty before continuing. Never write or stage the template at .ohmyagent/design/DESIGN.md or another version directory; if writing or verification fails, stop this step instead of fabricating a template. If retrieval, extraction, writing, or verification fails, stop this step instead of fabricating a template.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "visual-foundations"
+            }
+          }
+        },
+        {
+          "id": "template-default",
+          "description": "Choose and persist the strongest template automatically",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Call DesignTemplateCatalog with brief-relevant keywords, choose the strongest returned candidate without user interaction, save its exact preview_url with DesignSavePreview below RUN_DIRECTORY/template-previews/, and call DesignTemplateArtifact with that candidate's exact detail_url. Never reconstruct a URL from templateId or title. Call DesignTemplateArtifact with path RUN_DIRECTORY/DESIGN.md so the complete Chinese prompt is written atomically into this run's version directory. Read RUN_DIRECTORY/DESIGN.md back and verify it is non-empty before continuing. Never write or stage the template at .ohmyagent/design/DESIGN.md or another version directory; if writing or verification fails, stop this step instead of fabricating a template. Record the chosen template and rationale as evidence. If catalog retrieval, extraction, writing, or verification fails, stop instead of fabricating a template.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "visual-foundations"
+            }
+          }
+        },
+        {
+          "id": "art-direction",
+          "description": "Create and select authored art directions",
+          "skills": [
+            "web-design-art-direction"
+          ],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Use the qualifying image-generation MCP identified by image-capability to generate valid preview imagery, persist it below RUN_DIRECTORY/directions/, and use DesignSelectCards. Selection is explicit. If generation, persistence, or validation cannot produce three valid candidates after a bounded retry, complete this step with outcome template to fall back to template recommendation.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "template": "template-cards"
+            },
+            "tools": [
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "select",
+                "target": "visual-foundations"
+              },
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "next",
+                "target": "art-direction"
+              },
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "skip",
+                "target": "template-cards"
+              },
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "cancel",
+                "target": "cancelled"
+              }
+            ]
+          },
+          "unavailable_target": "art-direction-question"
+        },
+        {
+          "id": "art-direction-question",
+          "description": "Select an authored direction without visual cards",
+          "skills": [
+            "web-design-art-direction"
+          ],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Generate and validate three real design direction images with the qualifying image-generation MCP, persist them below RUN_DIRECTORY/directions/, then call AskUserQuestion with exactly one single-select question. Use these exact labels: Direction 1, Direction 2, Direction 3, More actions. Map each numbered label to one generated direction in its option description and mark the strongest direction as recommended. If the user answers with free text and no automatic tool transition occurs, interpret an unambiguous answer and call Workflow complete_step with the matching outcome direction-1, direction-2, direction-3, actions, next, template, or cancel; ask again when ambiguous. If three valid candidates cannot be produced after a bounded retry, complete this step with outcome template.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "direction-1": "visual-foundations",
+              "direction-2": "visual-foundations",
+              "direction-3": "visual-foundations",
+              "actions": "art-direction-actions",
+              "next": "art-direction-question",
+              "template": "template-question",
+              "cancel": "cancelled"
+            },
+            "tools": [
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Direction 1",
+                "target": "visual-foundations"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Direction 2",
+                "target": "visual-foundations"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Direction 3",
+                "target": "visual-foundations"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "More actions",
+                "target": "art-direction-actions"
+              }
+            ]
+          },
+          "unavailable_target": "art-direction-default"
+        },
+        {
+          "id": "art-direction-actions",
+          "description": "Choose an authored direction fallback action",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Call AskUserQuestion with exactly one single-select question using these exact labels: Generate different directions, Use template recommendation, Cancel. If the user answers with free text and no automatic tool transition occurs, interpret an unambiguous answer and call Workflow complete_step with outcome next, template, or cancel; ask again when ambiguous.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "next": "art-direction-question",
+              "template": "template-question",
+              "cancel": "cancelled"
+            },
+            "tools": [
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Generate different directions",
+                "target": "art-direction-question"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Use template recommendation",
+                "target": "template-question"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Cancel",
+                "target": "cancelled"
+              }
+            ]
+          },
+          "unavailable_target": "art-direction-default"
+        },
+        {
+          "id": "art-direction-default",
+          "description": "Choose the strongest authored direction automatically",
+          "skills": [
+            "web-design-art-direction"
+          ],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Generate and validate three real design direction images with the qualifying image-generation MCP and persist them below RUN_DIRECTORY/directions/. Compare all three against the brief, choose the strongest candidate without user interaction, and write its identity, local preview path, thesis, composition, typography, density, media treatment, emphasis, and selection rationale to RUN_DIRECTORY/SELECTED-DIRECTION.md. Complete this step with outcome selected. If three valid candidates cannot be produced after a bounded retry, complete it with outcome template.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "selected": "visual-foundations",
+              "template": "template-default"
+            }
+          }
+        },
+        {
+          "id": "direct-thesis",
+          "description": "Define a direct visual thesis",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. State a concrete hierarchy, layout, type, color, motion, and imagery thesis from the clarified brief.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "visual-foundations"
+            }
+          }
+        },
+        {
+          "id": "visual-foundations",
+          "description": "Establish visual foundations",
+          "skills": [
+            "visual-design-foundations"
+          ],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. If this workflow run reached template-artifact after an explicit template selection or template-default after an automatic selection, require and read RUN_DIRECTORY/DESIGN.md first and treat it as the selected-template source of truth; otherwise do not read a DESIGN.md from any other version or the design root. Define tokens, hierarchy, typography, color, spacing, imagery, and interaction foundations that concretely apply the current direction to the product brief. If this run selected a generated direction, ensure RUN_DIRECTORY/SELECTED-DIRECTION.md records the selected direction identity, local image path under RUN_DIRECTORY/directions/, thesis, and rationale before continuing; never use a selection record from another version.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "platform"
+            }
+          }
+        },
+        {
+          "id": "platform",
+          "description": "Apply platform constraints",
+          "skills": [
+            "frontend-design",
+            "web-component-design"
+          ],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Resolve platform architecture, component, responsive/device, and interaction constraints before product writes.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "html-prototype"
+            }
+          }
+        },
+        {
+          "id": "html-prototype",
+          "description": "Create the front-end HTML prototype",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. If this workflow run selected a template, require and read RUN_DIRECTORY/DESIGN.md first and visibly apply its layout, typography, color, spacing, shape, imagery, interaction, and responsive rules; otherwise do not read a DESIGN.md from any other version or the design root. Create or update only RUN_DIRECTORY/prototype.html as a self-contained responsive representation of the complete front-end design; do not modify product files. Ensure it opens in the workspace preview, then complete this step with evidence identifying the prototype and preview. Do not present the design as finished until prototype-quality-gate passes.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "design-jury"
+            }
+          }
+        },
+        {
+          "id": "design-jury",
+          "description": "Run the bounded five-role design jury",
+          "skills": [
+            "headless-design-jury"
+          ],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or inspect another run. Require a non-empty RUN_DIRECTORY/prototype.html plus fresh rendered screenshots for representative target frames. For each round, launch exactly five independent read-only Agent reviews with the exact roles Designer, Critic, Brand, Accessibility, and Copy. Give all reviewers the same brief, selected visual authority, prototype, and screenshot evidence; require each to return score, summary, and findings using only must_fix, should_fix, or nice_to_have severities. Submit the five raw reviews once through DesignJurySubmit and treat its composite_score, must_fix, and passed fields as authoritative. Never calculate or override the score. If it does not pass before round three, apply the smallest coherent corrections to RUN_DIRECTORY/prototype.html, recapture fresh evidence, and run the next five independent reviews. If this step is re-entered because the downstream prototype quality gate revised prototype.html, use the next unused Jury round; the tool binds each passing decision to the prototype hash. Complete with outcome passed only when DesignJurySubmit reports passed for the current prototype. If all three rounds were consumed before a downstream revision, complete with outcome failed rather than reusing the stale pass or exceeding the cap. After round three, complete with outcome failed and report unresolved findings without claiming completion.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "passed": "prototype-quality-gate",
+              "failed": "cancelled"
+            }
+          }
+        },
+        {
+          "id": "prototype-quality-gate",
+          "description": "Audit and score the rendered prototype",
+          "skills": [
+            "design-refinement"
+          ],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Render RUN_DIRECTORY/prototype.html and inspect actual screenshots rather than relying on source review or a claim that the preview opens. For Web, capture representative desktop, tablet, and mobile widths and exercise browser zoom at 75%, 100%, and 125%; for mobile, capture the declared target device plus narrow and wide representative frames. Keep viewport, device-pixel ratio, and zoom metadata with every capture. Apply the design-refinement hard gates and scorecard. Horizontal overflow, clipped or unreachable primary content, accidental fixed-width collapse, content-width utilization below 60%, left/right outer-whitespace asymmetry above 15% of viewport width, or a missing required state is blocking and cannot be averaged away. Score layout/proportion, responsive stability, typography/spacing/color, content density, accessibility, and state coverage; require at least 80/100 overall and at least 60% in every category. Write RUN_DIRECTORY/quality-report.md with screenshot paths, dimensions, zoom, measured or explicitly estimated metrics, category scores, total score, blockers, and the current audit attempt. Complete with outcome passed only when every hard gate and score threshold passes. Otherwise complete with outcome revise and return to html-prototype; after three failed audits, complete with outcome failed and report the remaining defects instead of claiming completion. After a pass, present the finished design and tell the user they can ask to develop the product or request further design adjustments.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "passed": "completed",
+              "revise": "html-prototype",
+              "failed": "cancelled"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "new-mobile",
+      "description": "Create a new mobile or React Native interface",
+      "steps": [
+        {
+          "id": "brief",
+          "description": "Establish the implementation-ready brief",
+          "skills": [
+            "design-generation"
+          ],
+          "instructions": "Before any other work, allocate this workflow run's immutable run directory. Inspect only direct child directories of .ohmyagent/design whose complete name matches ^v([1-9]\\d*)$; ignore files, nested directories, v0, leading-zero names, and every other name. Set N to one more than the largest captured decimal number, or 1 when there are no matches, and create exactly .ohmyagent/design/vN with a create-new operation that fails if it already exists. Never overwrite, reuse, delete, or merge an existing version directory; if creation races or the target exists, rescan and allocate a newer number. Record the exact path as RUN_DIRECTORY in this step's evidence so every later step in this route reuses it without rescanning or reallocating. Inspect the repository and resolve only material ambiguity. Record the brief as evidence.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "image-capability"
+            }
+          }
+        },
+        {
+          "id": "image-capability",
+          "description": "Detect image-generation MCP capability",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Inspect the tools available to this session and use ToolSearch when needed to discover MCP image generation capabilities. Treat this capability as available only when at least one callable MCP text-to-image tool exists; image analysis, image editing without text-to-image, and non-MCP tools do not qualify. Complete this step with outcome available and evidence naming the callable tool, or outcome unavailable and evidence that no qualifying tool exists. Do not generate images or recommend templates in this step.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "available": "art-direction",
+              "unavailable": "template-cards"
+            }
+          }
+        },
+        {
+          "id": "template-cards",
+          "description": "Present real template cards",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Call DesignTemplateCatalog with short brief-relevant mobile-interface keywords to retrieve real current template candidates; if fewer than three match, broaden the query. For the chosen three candidates, call DesignSavePreview with each exact preview_url and a distinct path below RUN_DIRECTORY/template-previews/, then call DesignSelectCards in template mode with those workspace previews. Pass each exact detail_url returned by DesignTemplateCatalog as templateRef; never derive it from the title or template ID. Do not output the full catalog, infer selection, or silently skip recommendation.",
+          "write_policy": "product",
+          "transitions": {
+            "tools": [
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "select",
+                "target": "template-artifact"
+              },
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "next",
+                "target": "template-cards"
+              },
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "skip",
+                "target": "direct-thesis"
+              },
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "cancel",
+                "target": "cancelled"
+              }
+            ]
+          },
+          "unavailable_target": "template-question"
+        },
+        {
+          "id": "template-question",
+          "description": "Select a template without visual cards",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Call DesignTemplateCatalog with brief-relevant keywords and retain the exact detail_url for the three strongest candidates. Save each candidate's exact preview_url with DesignSavePreview to a distinct path below RUN_DIRECTORY/template-previews/ before presenting it. Then call AskUserQuestion with exactly one single-select question using these exact labels: Template 1, Template 2, Template 3, More actions. Put each candidate title, concise rationale, and recommended marker when applicable in its matching option description. Preserve the numbered-label to exact detail_url mapping for template-artifact; never derive a URL from a title or template ID. If the user answers with free text and no automatic tool transition occurs, interpret an unambiguous answer and call Workflow complete_step with the matching outcome template-1, template-2, template-3, actions, next, skip, or cancel; ask again when ambiguous.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "template-1": "template-artifact",
+              "template-2": "template-artifact",
+              "template-3": "template-artifact",
+              "actions": "template-actions",
+              "next": "template-question",
+              "skip": "direct-thesis",
+              "cancel": "cancelled"
+            },
+            "tools": [
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Template 1",
+                "target": "template-artifact"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Template 2",
+                "target": "template-artifact"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Template 3",
+                "target": "template-artifact"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "More actions",
+                "target": "template-actions"
+              }
+            ]
+          },
+          "unavailable_target": "template-default"
+        },
+        {
+          "id": "template-actions",
+          "description": "Choose a template fallback action",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Call AskUserQuestion with exactly one single-select question using these exact labels: Show different templates, Continue without a template, Cancel. If the user answers with free text and no automatic tool transition occurs, interpret an unambiguous answer and call Workflow complete_step with outcome next, skip, or cancel; ask again when ambiguous.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "next": "template-question",
+              "skip": "direct-thesis",
+              "cancel": "cancelled"
+            },
+            "tools": [
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Show different templates",
+                "target": "template-question"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Continue without a template",
+                "target": "direct-thesis"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Cancel",
+                "target": "cancelled"
+              }
+            ]
+          },
+          "unavailable_target": "template-default"
+        },
+        {
+          "id": "template-artifact",
+          "description": "Persist and inspect selected template artifact",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Call DesignTemplateArtifact with the exact templateRef associated with the user's DesignSelectCards or AskUserQuestion selection; never reconstruct a URL from templateId, title, or numbered label. Call DesignTemplateArtifact with path RUN_DIRECTORY/DESIGN.md so the complete Chinese prompt is written atomically into this run's version directory. Read RUN_DIRECTORY/DESIGN.md back and verify it is non-empty before continuing. Never write or stage the template at .ohmyagent/design/DESIGN.md or another version directory; if writing or verification fails, stop this step instead of fabricating a template. If retrieval, extraction, writing, or verification fails, stop this step instead of fabricating a template.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "visual-foundations"
+            }
+          }
+        },
+        {
+          "id": "template-default",
+          "description": "Choose and persist the strongest template automatically",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Call DesignTemplateCatalog with brief-relevant keywords, choose the strongest returned candidate without user interaction, save its exact preview_url with DesignSavePreview below RUN_DIRECTORY/template-previews/, and call DesignTemplateArtifact with that candidate's exact detail_url. Never reconstruct a URL from templateId or title. Call DesignTemplateArtifact with path RUN_DIRECTORY/DESIGN.md so the complete Chinese prompt is written atomically into this run's version directory. Read RUN_DIRECTORY/DESIGN.md back and verify it is non-empty before continuing. Never write or stage the template at .ohmyagent/design/DESIGN.md or another version directory; if writing or verification fails, stop this step instead of fabricating a template. Record the chosen template and rationale as evidence. If catalog retrieval, extraction, writing, or verification fails, stop instead of fabricating a template.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "visual-foundations"
+            }
+          }
+        },
+        {
+          "id": "art-direction",
+          "description": "Create and select authored art directions",
+          "skills": [
+            "web-design-art-direction"
+          ],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Use the qualifying image-generation MCP identified by image-capability to generate valid preview imagery, persist it below RUN_DIRECTORY/directions/, and use DesignSelectCards. Selection is explicit. If generation, persistence, or validation cannot produce three valid candidates after a bounded retry, complete this step with outcome template to fall back to template recommendation.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "template": "template-cards"
+            },
+            "tools": [
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "select",
+                "target": "visual-foundations"
+              },
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "next",
+                "target": "art-direction"
+              },
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "skip",
+                "target": "template-cards"
+              },
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "cancel",
+                "target": "cancelled"
+              }
+            ]
+          },
+          "unavailable_target": "art-direction-question"
+        },
+        {
+          "id": "art-direction-question",
+          "description": "Select an authored direction without visual cards",
+          "skills": [
+            "web-design-art-direction"
+          ],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Generate and validate three real design direction images with the qualifying image-generation MCP, persist them below RUN_DIRECTORY/directions/, then call AskUserQuestion with exactly one single-select question. Use these exact labels: Direction 1, Direction 2, Direction 3, More actions. Map each numbered label to one generated direction in its option description and mark the strongest direction as recommended. If the user answers with free text and no automatic tool transition occurs, interpret an unambiguous answer and call Workflow complete_step with the matching outcome direction-1, direction-2, direction-3, actions, next, template, or cancel; ask again when ambiguous. If three valid candidates cannot be produced after a bounded retry, complete this step with outcome template.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "direction-1": "visual-foundations",
+              "direction-2": "visual-foundations",
+              "direction-3": "visual-foundations",
+              "actions": "art-direction-actions",
+              "next": "art-direction-question",
+              "template": "template-question",
+              "cancel": "cancelled"
+            },
+            "tools": [
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Direction 1",
+                "target": "visual-foundations"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Direction 2",
+                "target": "visual-foundations"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Direction 3",
+                "target": "visual-foundations"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "More actions",
+                "target": "art-direction-actions"
+              }
+            ]
+          },
+          "unavailable_target": "art-direction-default"
+        },
+        {
+          "id": "art-direction-actions",
+          "description": "Choose an authored direction fallback action",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Call AskUserQuestion with exactly one single-select question using these exact labels: Generate different directions, Use template recommendation, Cancel. If the user answers with free text and no automatic tool transition occurs, interpret an unambiguous answer and call Workflow complete_step with outcome next, template, or cancel; ask again when ambiguous.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "next": "art-direction-question",
+              "template": "template-question",
+              "cancel": "cancelled"
+            },
+            "tools": [
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Generate different directions",
+                "target": "art-direction-question"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Use template recommendation",
+                "target": "template-question"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Cancel",
+                "target": "cancelled"
+              }
+            ]
+          },
+          "unavailable_target": "art-direction-default"
+        },
+        {
+          "id": "art-direction-default",
+          "description": "Choose the strongest authored direction automatically",
+          "skills": [
+            "web-design-art-direction"
+          ],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Generate and validate three real design direction images with the qualifying image-generation MCP and persist them below RUN_DIRECTORY/directions/. Compare all three against the brief, choose the strongest candidate without user interaction, and write its identity, local preview path, thesis, composition, typography, density, media treatment, emphasis, and selection rationale to RUN_DIRECTORY/SELECTED-DIRECTION.md. Complete this step with outcome selected. If three valid candidates cannot be produced after a bounded retry, complete it with outcome template.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "selected": "visual-foundations",
+              "template": "template-default"
+            }
+          }
+        },
+        {
+          "id": "direct-thesis",
+          "description": "Define a direct visual thesis",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. State a concrete hierarchy, layout, type, color, motion, and imagery thesis from the clarified brief.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "visual-foundations"
+            }
+          }
+        },
+        {
+          "id": "visual-foundations",
+          "description": "Establish visual foundations",
+          "skills": [
+            "visual-design-foundations"
+          ],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. If this workflow run reached template-artifact after an explicit template selection or template-default after an automatic selection, require and read RUN_DIRECTORY/DESIGN.md first and treat it as the selected-template source of truth; otherwise do not read a DESIGN.md from any other version or the design root. Define tokens, hierarchy, typography, color, spacing, imagery, and interaction foundations that concretely apply the current direction to the product brief. If this run selected a generated direction, ensure RUN_DIRECTORY/SELECTED-DIRECTION.md records the selected direction identity, local image path under RUN_DIRECTORY/directions/, thesis, and rationale before continuing; never use a selection record from another version.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "platform"
+            }
+          }
+        },
+        {
+          "id": "platform",
+          "description": "Apply platform constraints",
+          "skills": [
+            "react-native-design"
+          ],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Resolve platform architecture, component, responsive/device, and interaction constraints before product writes.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "html-prototype"
+            }
+          }
+        },
+        {
+          "id": "html-prototype",
+          "description": "Create the front-end HTML prototype",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. If this workflow run selected a template, require and read RUN_DIRECTORY/DESIGN.md first and visibly apply its layout, typography, color, spacing, shape, imagery, interaction, and responsive rules; otherwise do not read a DESIGN.md from any other version or the design root. Create or update only RUN_DIRECTORY/prototype.html as a self-contained responsive representation of the complete front-end design; do not modify product files. Ensure it opens in the workspace preview, then complete this step with evidence identifying the prototype and preview. Do not present the design as finished until prototype-quality-gate passes.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "design-jury"
+            }
+          }
+        },
+        {
+          "id": "design-jury",
+          "description": "Run the bounded five-role design jury",
+          "skills": [
+            "headless-design-jury"
+          ],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or inspect another run. Require a non-empty RUN_DIRECTORY/prototype.html plus fresh rendered screenshots for representative target frames. For each round, launch exactly five independent read-only Agent reviews with the exact roles Designer, Critic, Brand, Accessibility, and Copy. Give all reviewers the same brief, selected visual authority, prototype, and screenshot evidence; require each to return score, summary, and findings using only must_fix, should_fix, or nice_to_have severities. Submit the five raw reviews once through DesignJurySubmit and treat its composite_score, must_fix, and passed fields as authoritative. Never calculate or override the score. If it does not pass before round three, apply the smallest coherent corrections to RUN_DIRECTORY/prototype.html, recapture fresh evidence, and run the next five independent reviews. If this step is re-entered because the downstream prototype quality gate revised prototype.html, use the next unused Jury round; the tool binds each passing decision to the prototype hash. Complete with outcome passed only when DesignJurySubmit reports passed for the current prototype. If all three rounds were consumed before a downstream revision, complete with outcome failed rather than reusing the stale pass or exceeding the cap. After round three, complete with outcome failed and report unresolved findings without claiming completion.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "passed": "prototype-quality-gate",
+              "failed": "cancelled"
+            }
+          }
+        },
+        {
+          "id": "prototype-quality-gate",
+          "description": "Audit and score the rendered prototype",
+          "skills": [
+            "design-refinement"
+          ],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Render RUN_DIRECTORY/prototype.html and inspect actual screenshots rather than relying on source review or a claim that the preview opens. For Web, capture representative desktop, tablet, and mobile widths and exercise browser zoom at 75%, 100%, and 125%; for mobile, capture the declared target device plus narrow and wide representative frames. Keep viewport, device-pixel ratio, and zoom metadata with every capture. Apply the design-refinement hard gates and scorecard. Horizontal overflow, clipped or unreachable primary content, accidental fixed-width collapse, content-width utilization below 60%, left/right outer-whitespace asymmetry above 15% of viewport width, or a missing required state is blocking and cannot be averaged away. Score layout/proportion, responsive stability, typography/spacing/color, content density, accessibility, and state coverage; require at least 80/100 overall and at least 60% in every category. Write RUN_DIRECTORY/quality-report.md with screenshot paths, dimensions, zoom, measured or explicitly estimated metrics, category scores, total score, blockers, and the current audit attempt. Complete with outcome passed only when every hard gate and score threshold passes. Otherwise complete with outcome revise and return to html-prototype; after three failed audits, complete with outcome failed and report the remaining defects instead of claiming completion. After a pass, present the finished design and tell the user they can ask to develop the product or request further design adjustments.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "passed": "completed",
+              "revise": "html-prototype",
+              "failed": "cancelled"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "existing-web",
+      "description": "Refine or redesign an existing Web interface",
+      "steps": [
+        {
+          "id": "existing-assessment",
+          "description": "Assess existing interface",
+          "skills": [
+            "design-refinement"
+          ],
+          "instructions": "Before any other work, allocate this workflow run's immutable run directory. Inspect only direct child directories of .ohmyagent/design whose complete name matches ^v([1-9]\\d*)$; ignore files, nested directories, v0, leading-zero names, and every other name. Set N to one more than the largest captured decimal number, or 1 when there are no matches, and create exactly .ohmyagent/design/vN with a create-new operation that fails if it already exists. Never overwrite, reuse, delete, or merge an existing version directory; if creation races or the target exists, rescan and allocate a newer number. Record the exact path as RUN_DIRECTORY in this step's evidence so every later step in this route reuses it without rescanning or reallocating. Inspect the implementation and rendered interface, then record the assessment as evidence.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "image-capability"
+            }
+          }
+        },
+        {
+          "id": "image-capability",
+          "description": "Detect image-generation MCP capability",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Inspect the tools available to this session and use ToolSearch when needed to discover MCP image generation capabilities. Treat this capability as available only when at least one callable MCP text-to-image tool exists; image analysis, image editing without text-to-image, and non-MCP tools do not qualify. Complete this step with outcome available and evidence naming the callable tool, or outcome unavailable and evidence that no qualifying tool exists. Do not generate images or recommend templates in this step.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "available": "art-direction",
+              "unavailable": "template-cards"
+            }
+          }
+        },
+        {
+          "id": "template-cards",
+          "description": "Present real template cards",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Call DesignTemplateCatalog with short brief-relevant keywords to retrieve real current template candidates; if fewer than three match, broaden the query. For the chosen three candidates, call DesignSavePreview with each exact preview_url and a distinct path below RUN_DIRECTORY/template-previews/, then call DesignSelectCards in template mode with those workspace previews. Pass each exact detail_url returned by DesignTemplateCatalog as templateRef; never derive it from the title or template ID. Do not output the full catalog, infer selection, or silently skip recommendation.",
+          "write_policy": "product",
+          "transitions": {
+            "tools": [
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "select",
+                "target": "template-artifact"
+              },
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "next",
+                "target": "template-cards"
+              },
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "skip",
+                "target": "direct-thesis"
+              },
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "cancel",
+                "target": "cancelled"
+              }
+            ]
+          },
+          "unavailable_target": "template-question"
+        },
+        {
+          "id": "template-question",
+          "description": "Select a template without visual cards",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Call DesignTemplateCatalog with brief-relevant keywords and retain the exact detail_url for the three strongest candidates. Save each candidate's exact preview_url with DesignSavePreview to a distinct path below RUN_DIRECTORY/template-previews/ before presenting it. Then call AskUserQuestion with exactly one single-select question using these exact labels: Template 1, Template 2, Template 3, More actions. Put each candidate title, concise rationale, and recommended marker when applicable in its matching option description. Preserve the numbered-label to exact detail_url mapping for template-artifact; never derive a URL from a title or template ID. If the user answers with free text and no automatic tool transition occurs, interpret an unambiguous answer and call Workflow complete_step with the matching outcome template-1, template-2, template-3, actions, next, skip, or cancel; ask again when ambiguous.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "template-1": "template-artifact",
+              "template-2": "template-artifact",
+              "template-3": "template-artifact",
+              "actions": "template-actions",
+              "next": "template-question",
+              "skip": "direct-thesis",
+              "cancel": "cancelled"
+            },
+            "tools": [
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Template 1",
+                "target": "template-artifact"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Template 2",
+                "target": "template-artifact"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Template 3",
+                "target": "template-artifact"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "More actions",
+                "target": "template-actions"
+              }
+            ]
+          },
+          "unavailable_target": "template-default"
+        },
+        {
+          "id": "template-actions",
+          "description": "Choose a template fallback action",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Call AskUserQuestion with exactly one single-select question using these exact labels: Show different templates, Continue without a template, Cancel. If the user answers with free text and no automatic tool transition occurs, interpret an unambiguous answer and call Workflow complete_step with outcome next, skip, or cancel; ask again when ambiguous.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "next": "template-question",
+              "skip": "direct-thesis",
+              "cancel": "cancelled"
+            },
+            "tools": [
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Show different templates",
+                "target": "template-question"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Continue without a template",
+                "target": "direct-thesis"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Cancel",
+                "target": "cancelled"
+              }
+            ]
+          },
+          "unavailable_target": "template-default"
+        },
+        {
+          "id": "template-artifact",
+          "description": "Persist and inspect selected template artifact",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Call DesignTemplateArtifact with the exact templateRef associated with the user's DesignSelectCards or AskUserQuestion selection; never reconstruct a URL from templateId, title, or numbered label. Call DesignTemplateArtifact with path RUN_DIRECTORY/DESIGN.md so the complete Chinese prompt is written atomically into this run's version directory. Read RUN_DIRECTORY/DESIGN.md back and verify it is non-empty before continuing. Never write or stage the template at .ohmyagent/design/DESIGN.md or another version directory; if writing or verification fails, stop this step instead of fabricating a template. If retrieval, extraction, writing, or verification fails, stop this step instead of fabricating a template.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "visual-foundations"
+            }
+          }
+        },
+        {
+          "id": "template-default",
+          "description": "Choose and persist the strongest template automatically",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Call DesignTemplateCatalog with brief-relevant keywords, choose the strongest returned candidate without user interaction, save its exact preview_url with DesignSavePreview below RUN_DIRECTORY/template-previews/, and call DesignTemplateArtifact with that candidate's exact detail_url. Never reconstruct a URL from templateId or title. Call DesignTemplateArtifact with path RUN_DIRECTORY/DESIGN.md so the complete Chinese prompt is written atomically into this run's version directory. Read RUN_DIRECTORY/DESIGN.md back and verify it is non-empty before continuing. Never write or stage the template at .ohmyagent/design/DESIGN.md or another version directory; if writing or verification fails, stop this step instead of fabricating a template. Record the chosen template and rationale as evidence. If catalog retrieval, extraction, writing, or verification fails, stop instead of fabricating a template.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "visual-foundations"
+            }
+          }
+        },
+        {
+          "id": "art-direction",
+          "description": "Create and select authored art directions",
+          "skills": [
+            "web-design-art-direction"
+          ],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Use the qualifying image-generation MCP identified by image-capability to generate valid preview imagery, persist it below RUN_DIRECTORY/directions/, and use DesignSelectCards. Selection is explicit. If generation, persistence, or validation cannot produce three valid candidates after a bounded retry, complete this step with outcome template to fall back to template recommendation.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "template": "template-cards"
+            },
+            "tools": [
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "select",
+                "target": "visual-foundations"
+              },
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "next",
+                "target": "art-direction"
+              },
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "skip",
+                "target": "template-cards"
+              },
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "cancel",
+                "target": "cancelled"
+              }
+            ]
+          },
+          "unavailable_target": "art-direction-question"
+        },
+        {
+          "id": "art-direction-question",
+          "description": "Select an authored direction without visual cards",
+          "skills": [
+            "web-design-art-direction"
+          ],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Generate and validate three real design direction images with the qualifying image-generation MCP, persist them below RUN_DIRECTORY/directions/, then call AskUserQuestion with exactly one single-select question. Use these exact labels: Direction 1, Direction 2, Direction 3, More actions. Map each numbered label to one generated direction in its option description and mark the strongest direction as recommended. If the user answers with free text and no automatic tool transition occurs, interpret an unambiguous answer and call Workflow complete_step with the matching outcome direction-1, direction-2, direction-3, actions, next, template, or cancel; ask again when ambiguous. If three valid candidates cannot be produced after a bounded retry, complete this step with outcome template.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "direction-1": "visual-foundations",
+              "direction-2": "visual-foundations",
+              "direction-3": "visual-foundations",
+              "actions": "art-direction-actions",
+              "next": "art-direction-question",
+              "template": "template-question",
+              "cancel": "cancelled"
+            },
+            "tools": [
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Direction 1",
+                "target": "visual-foundations"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Direction 2",
+                "target": "visual-foundations"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Direction 3",
+                "target": "visual-foundations"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "More actions",
+                "target": "art-direction-actions"
+              }
+            ]
+          },
+          "unavailable_target": "art-direction-default"
+        },
+        {
+          "id": "art-direction-actions",
+          "description": "Choose an authored direction fallback action",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Call AskUserQuestion with exactly one single-select question using these exact labels: Generate different directions, Use template recommendation, Cancel. If the user answers with free text and no automatic tool transition occurs, interpret an unambiguous answer and call Workflow complete_step with outcome next, template, or cancel; ask again when ambiguous.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "next": "art-direction-question",
+              "template": "template-question",
+              "cancel": "cancelled"
+            },
+            "tools": [
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Generate different directions",
+                "target": "art-direction-question"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Use template recommendation",
+                "target": "template-question"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Cancel",
+                "target": "cancelled"
+              }
+            ]
+          },
+          "unavailable_target": "art-direction-default"
+        },
+        {
+          "id": "art-direction-default",
+          "description": "Choose the strongest authored direction automatically",
+          "skills": [
+            "web-design-art-direction"
+          ],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Generate and validate three real design direction images with the qualifying image-generation MCP and persist them below RUN_DIRECTORY/directions/. Compare all three against the brief, choose the strongest candidate without user interaction, and write its identity, local preview path, thesis, composition, typography, density, media treatment, emphasis, and selection rationale to RUN_DIRECTORY/SELECTED-DIRECTION.md. Complete this step with outcome selected. If three valid candidates cannot be produced after a bounded retry, complete it with outcome template.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "selected": "visual-foundations",
+              "template": "template-default"
+            }
+          }
+        },
+        {
+          "id": "direct-thesis",
+          "description": "Define a direct visual thesis",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. State a concrete hierarchy, layout, type, color, motion, and imagery thesis from the clarified brief.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "visual-foundations"
+            }
+          }
+        },
+        {
+          "id": "visual-foundations",
+          "description": "Establish visual foundations",
+          "skills": [
+            "visual-design-foundations"
+          ],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. If this workflow run reached template-artifact after an explicit template selection or template-default after an automatic selection, require and read RUN_DIRECTORY/DESIGN.md first and treat it as the selected-template source of truth; otherwise do not read a DESIGN.md from any other version or the design root. Define tokens, hierarchy, typography, color, spacing, imagery, and interaction foundations that concretely apply the current direction to the product brief. If this run selected a generated direction, ensure RUN_DIRECTORY/SELECTED-DIRECTION.md records the selected direction identity, local image path under RUN_DIRECTORY/directions/, thesis, and rationale before continuing; never use a selection record from another version.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "platform"
+            }
+          }
+        },
+        {
+          "id": "platform",
+          "description": "Apply platform constraints",
+          "skills": [
+            "frontend-design",
+            "web-component-design"
+          ],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Resolve platform architecture, component, responsive/device, and interaction constraints before product writes.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "html-prototype"
+            }
+          }
+        },
+        {
+          "id": "html-prototype",
+          "description": "Create the front-end HTML prototype",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. If this workflow run selected a template, require and read RUN_DIRECTORY/DESIGN.md first and visibly apply its layout, typography, color, spacing, shape, imagery, interaction, and responsive rules; otherwise do not read a DESIGN.md from any other version or the design root. Create or update only RUN_DIRECTORY/prototype.html as a self-contained responsive representation of the complete front-end design; do not modify product files. Ensure it opens in the workspace preview, then complete this step with evidence identifying the prototype and preview. Do not present the design as finished until prototype-quality-gate passes.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "design-jury"
+            }
+          }
+        },
+        {
+          "id": "design-jury",
+          "description": "Run the bounded five-role design jury",
+          "skills": [
+            "headless-design-jury"
+          ],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or inspect another run. Require a non-empty RUN_DIRECTORY/prototype.html plus fresh rendered screenshots for representative target frames. For each round, launch exactly five independent read-only Agent reviews with the exact roles Designer, Critic, Brand, Accessibility, and Copy. Give all reviewers the same brief, selected visual authority, prototype, and screenshot evidence; require each to return score, summary, and findings using only must_fix, should_fix, or nice_to_have severities. Submit the five raw reviews once through DesignJurySubmit and treat its composite_score, must_fix, and passed fields as authoritative. Never calculate or override the score. If it does not pass before round three, apply the smallest coherent corrections to RUN_DIRECTORY/prototype.html, recapture fresh evidence, and run the next five independent reviews. If this step is re-entered because the downstream prototype quality gate revised prototype.html, use the next unused Jury round; the tool binds each passing decision to the prototype hash. Complete with outcome passed only when DesignJurySubmit reports passed for the current prototype. If all three rounds were consumed before a downstream revision, complete with outcome failed rather than reusing the stale pass or exceeding the cap. After round three, complete with outcome failed and report unresolved findings without claiming completion.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "passed": "prototype-quality-gate",
+              "failed": "cancelled"
+            }
+          }
+        },
+        {
+          "id": "prototype-quality-gate",
+          "description": "Audit and score the rendered prototype",
+          "skills": [
+            "design-refinement"
+          ],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Render RUN_DIRECTORY/prototype.html and inspect actual screenshots rather than relying on source review or a claim that the preview opens. For Web, capture representative desktop, tablet, and mobile widths and exercise browser zoom at 75%, 100%, and 125%; for mobile, capture the declared target device plus narrow and wide representative frames. Keep viewport, device-pixel ratio, and zoom metadata with every capture. Apply the design-refinement hard gates and scorecard. Horizontal overflow, clipped or unreachable primary content, accidental fixed-width collapse, content-width utilization below 60%, left/right outer-whitespace asymmetry above 15% of viewport width, or a missing required state is blocking and cannot be averaged away. Score layout/proportion, responsive stability, typography/spacing/color, content density, accessibility, and state coverage; require at least 80/100 overall and at least 60% in every category. Write RUN_DIRECTORY/quality-report.md with screenshot paths, dimensions, zoom, measured or explicitly estimated metrics, category scores, total score, blockers, and the current audit attempt. Complete with outcome passed only when every hard gate and score threshold passes. Otherwise complete with outcome revise and return to html-prototype; after three failed audits, complete with outcome failed and report the remaining defects instead of claiming completion. After a pass, present the finished design and tell the user they can ask to develop the product or request further design adjustments.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "passed": "completed",
+              "revise": "html-prototype",
+              "failed": "cancelled"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "existing-mobile",
+      "description": "Refine or redesign an existing mobile interface",
+      "steps": [
+        {
+          "id": "existing-assessment",
+          "description": "Assess existing interface",
+          "skills": [
+            "design-refinement"
+          ],
+          "instructions": "Before any other work, allocate this workflow run's immutable run directory. Inspect only direct child directories of .ohmyagent/design whose complete name matches ^v([1-9]\\d*)$; ignore files, nested directories, v0, leading-zero names, and every other name. Set N to one more than the largest captured decimal number, or 1 when there are no matches, and create exactly .ohmyagent/design/vN with a create-new operation that fails if it already exists. Never overwrite, reuse, delete, or merge an existing version directory; if creation races or the target exists, rescan and allocate a newer number. Record the exact path as RUN_DIRECTORY in this step's evidence so every later step in this route reuses it without rescanning or reallocating. Inspect the implementation and rendered interface, then record the assessment as evidence.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "image-capability"
+            }
+          }
+        },
+        {
+          "id": "image-capability",
+          "description": "Detect image-generation MCP capability",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Inspect the tools available to this session and use ToolSearch when needed to discover MCP image generation capabilities. Treat this capability as available only when at least one callable MCP text-to-image tool exists; image analysis, image editing without text-to-image, and non-MCP tools do not qualify. Complete this step with outcome available and evidence naming the callable tool, or outcome unavailable and evidence that no qualifying tool exists. Do not generate images or recommend templates in this step.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "available": "art-direction",
+              "unavailable": "template-cards"
+            }
+          }
+        },
+        {
+          "id": "template-cards",
+          "description": "Present real template cards",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Call DesignTemplateCatalog with short brief-relevant mobile-interface keywords to retrieve real current template candidates; if fewer than three match, broaden the query. For the chosen three candidates, call DesignSavePreview with each exact preview_url and a distinct path below RUN_DIRECTORY/template-previews/, then call DesignSelectCards in template mode with those workspace previews. Pass each exact detail_url returned by DesignTemplateCatalog as templateRef; never derive it from the title or template ID. Do not output the full catalog, infer selection, or silently skip recommendation.",
+          "write_policy": "product",
+          "transitions": {
+            "tools": [
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "select",
+                "target": "template-artifact"
+              },
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "next",
+                "target": "template-cards"
+              },
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "skip",
+                "target": "direct-thesis"
+              },
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "cancel",
+                "target": "cancelled"
+              }
+            ]
+          },
+          "unavailable_target": "template-question"
+        },
+        {
+          "id": "template-question",
+          "description": "Select a template without visual cards",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Call DesignTemplateCatalog with brief-relevant keywords and retain the exact detail_url for the three strongest candidates. Save each candidate's exact preview_url with DesignSavePreview to a distinct path below RUN_DIRECTORY/template-previews/ before presenting it. Then call AskUserQuestion with exactly one single-select question using these exact labels: Template 1, Template 2, Template 3, More actions. Put each candidate title, concise rationale, and recommended marker when applicable in its matching option description. Preserve the numbered-label to exact detail_url mapping for template-artifact; never derive a URL from a title or template ID. If the user answers with free text and no automatic tool transition occurs, interpret an unambiguous answer and call Workflow complete_step with the matching outcome template-1, template-2, template-3, actions, next, skip, or cancel; ask again when ambiguous.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "template-1": "template-artifact",
+              "template-2": "template-artifact",
+              "template-3": "template-artifact",
+              "actions": "template-actions",
+              "next": "template-question",
+              "skip": "direct-thesis",
+              "cancel": "cancelled"
+            },
+            "tools": [
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Template 1",
+                "target": "template-artifact"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Template 2",
+                "target": "template-artifact"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Template 3",
+                "target": "template-artifact"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "More actions",
+                "target": "template-actions"
+              }
+            ]
+          },
+          "unavailable_target": "template-default"
+        },
+        {
+          "id": "template-actions",
+          "description": "Choose a template fallback action",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Call AskUserQuestion with exactly one single-select question using these exact labels: Show different templates, Continue without a template, Cancel. If the user answers with free text and no automatic tool transition occurs, interpret an unambiguous answer and call Workflow complete_step with outcome next, skip, or cancel; ask again when ambiguous.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "next": "template-question",
+              "skip": "direct-thesis",
+              "cancel": "cancelled"
+            },
+            "tools": [
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Show different templates",
+                "target": "template-question"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Continue without a template",
+                "target": "direct-thesis"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Cancel",
+                "target": "cancelled"
+              }
+            ]
+          },
+          "unavailable_target": "template-default"
+        },
+        {
+          "id": "template-artifact",
+          "description": "Persist and inspect selected template artifact",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Call DesignTemplateArtifact with the exact templateRef associated with the user's DesignSelectCards or AskUserQuestion selection; never reconstruct a URL from templateId, title, or numbered label. Call DesignTemplateArtifact with path RUN_DIRECTORY/DESIGN.md so the complete Chinese prompt is written atomically into this run's version directory. Read RUN_DIRECTORY/DESIGN.md back and verify it is non-empty before continuing. Never write or stage the template at .ohmyagent/design/DESIGN.md or another version directory; if writing or verification fails, stop this step instead of fabricating a template. If retrieval, extraction, writing, or verification fails, stop this step instead of fabricating a template.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "visual-foundations"
+            }
+          }
+        },
+        {
+          "id": "template-default",
+          "description": "Choose and persist the strongest template automatically",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Call DesignTemplateCatalog with brief-relevant keywords, choose the strongest returned candidate without user interaction, save its exact preview_url with DesignSavePreview below RUN_DIRECTORY/template-previews/, and call DesignTemplateArtifact with that candidate's exact detail_url. Never reconstruct a URL from templateId or title. Call DesignTemplateArtifact with path RUN_DIRECTORY/DESIGN.md so the complete Chinese prompt is written atomically into this run's version directory. Read RUN_DIRECTORY/DESIGN.md back and verify it is non-empty before continuing. Never write or stage the template at .ohmyagent/design/DESIGN.md or another version directory; if writing or verification fails, stop this step instead of fabricating a template. Record the chosen template and rationale as evidence. If catalog retrieval, extraction, writing, or verification fails, stop instead of fabricating a template.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "visual-foundations"
+            }
+          }
+        },
+        {
+          "id": "art-direction",
+          "description": "Create and select authored art directions",
+          "skills": [
+            "web-design-art-direction"
+          ],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Use the qualifying image-generation MCP identified by image-capability to generate valid preview imagery, persist it below RUN_DIRECTORY/directions/, and use DesignSelectCards. Selection is explicit. If generation, persistence, or validation cannot produce three valid candidates after a bounded retry, complete this step with outcome template to fall back to template recommendation.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "template": "template-cards"
+            },
+            "tools": [
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "select",
+                "target": "visual-foundations"
+              },
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "next",
+                "target": "art-direction"
+              },
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "skip",
+                "target": "template-cards"
+              },
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "cancel",
+                "target": "cancelled"
+              }
+            ]
+          },
+          "unavailable_target": "art-direction-question"
+        },
+        {
+          "id": "art-direction-question",
+          "description": "Select an authored direction without visual cards",
+          "skills": [
+            "web-design-art-direction"
+          ],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Generate and validate three real design direction images with the qualifying image-generation MCP, persist them below RUN_DIRECTORY/directions/, then call AskUserQuestion with exactly one single-select question. Use these exact labels: Direction 1, Direction 2, Direction 3, More actions. Map each numbered label to one generated direction in its option description and mark the strongest direction as recommended. If the user answers with free text and no automatic tool transition occurs, interpret an unambiguous answer and call Workflow complete_step with the matching outcome direction-1, direction-2, direction-3, actions, next, template, or cancel; ask again when ambiguous. If three valid candidates cannot be produced after a bounded retry, complete this step with outcome template.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "direction-1": "visual-foundations",
+              "direction-2": "visual-foundations",
+              "direction-3": "visual-foundations",
+              "actions": "art-direction-actions",
+              "next": "art-direction-question",
+              "template": "template-question",
+              "cancel": "cancelled"
+            },
+            "tools": [
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Direction 1",
+                "target": "visual-foundations"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Direction 2",
+                "target": "visual-foundations"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Direction 3",
+                "target": "visual-foundations"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "More actions",
+                "target": "art-direction-actions"
+              }
+            ]
+          },
+          "unavailable_target": "art-direction-default"
+        },
+        {
+          "id": "art-direction-actions",
+          "description": "Choose an authored direction fallback action",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Call AskUserQuestion with exactly one single-select question using these exact labels: Generate different directions, Use template recommendation, Cancel. If the user answers with free text and no automatic tool transition occurs, interpret an unambiguous answer and call Workflow complete_step with outcome next, template, or cancel; ask again when ambiguous.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "next": "art-direction-question",
+              "template": "template-question",
+              "cancel": "cancelled"
+            },
+            "tools": [
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Generate different directions",
+                "target": "art-direction-question"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Use template recommendation",
+                "target": "template-question"
+              },
+              {
+                "tool": "AskUserQuestion",
+                "field": "selection",
+                "equals": "Cancel",
+                "target": "cancelled"
+              }
+            ]
+          },
+          "unavailable_target": "art-direction-default"
+        },
+        {
+          "id": "art-direction-default",
+          "description": "Choose the strongest authored direction automatically",
+          "skills": [
+            "web-design-art-direction"
+          ],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Generate and validate three real design direction images with the qualifying image-generation MCP and persist them below RUN_DIRECTORY/directions/. Compare all three against the brief, choose the strongest candidate without user interaction, and write its identity, local preview path, thesis, composition, typography, density, media treatment, emphasis, and selection rationale to RUN_DIRECTORY/SELECTED-DIRECTION.md. Complete this step with outcome selected. If three valid candidates cannot be produced after a bounded retry, complete it with outcome template.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "selected": "visual-foundations",
+              "template": "template-default"
+            }
+          }
+        },
+        {
+          "id": "direct-thesis",
+          "description": "Define a direct visual thesis",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. State a concrete hierarchy, layout, type, color, motion, and imagery thesis from the clarified brief.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "visual-foundations"
+            }
+          }
+        },
+        {
+          "id": "visual-foundations",
+          "description": "Establish visual foundations",
+          "skills": [
+            "visual-design-foundations"
+          ],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. If this workflow run reached template-artifact after an explicit template selection or template-default after an automatic selection, require and read RUN_DIRECTORY/DESIGN.md first and treat it as the selected-template source of truth; otherwise do not read a DESIGN.md from any other version or the design root. Define tokens, hierarchy, typography, color, spacing, imagery, and interaction foundations that concretely apply the current direction to the product brief. If this run selected a generated direction, ensure RUN_DIRECTORY/SELECTED-DIRECTION.md records the selected direction identity, local image path under RUN_DIRECTORY/directions/, thesis, and rationale before continuing; never use a selection record from another version.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "platform"
+            }
+          }
+        },
+        {
+          "id": "platform",
+          "description": "Apply platform constraints",
+          "skills": [
+            "react-native-design"
+          ],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Resolve platform architecture, component, responsive/device, and interaction constraints before product writes.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "html-prototype"
+            }
+          }
+        },
+        {
+          "id": "html-prototype",
+          "description": "Create the front-end HTML prototype",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. If this workflow run selected a template, require and read RUN_DIRECTORY/DESIGN.md first and visibly apply its layout, typography, color, spacing, shape, imagery, interaction, and responsive rules; otherwise do not read a DESIGN.md from any other version or the design root. Create or update only RUN_DIRECTORY/prototype.html as a self-contained responsive representation of the complete front-end design; do not modify product files. Ensure it opens in the workspace preview, then complete this step with evidence identifying the prototype and preview. Do not present the design as finished until prototype-quality-gate passes.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "design-jury"
+            }
+          }
+        },
+        {
+          "id": "design-jury",
+          "description": "Run the bounded five-role design jury",
+          "skills": [
+            "headless-design-jury"
+          ],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or inspect another run. Require a non-empty RUN_DIRECTORY/prototype.html plus fresh rendered screenshots for representative target frames. For each round, launch exactly five independent read-only Agent reviews with the exact roles Designer, Critic, Brand, Accessibility, and Copy. Give all reviewers the same brief, selected visual authority, prototype, and screenshot evidence; require each to return score, summary, and findings using only must_fix, should_fix, or nice_to_have severities. Submit the five raw reviews once through DesignJurySubmit and treat its composite_score, must_fix, and passed fields as authoritative. Never calculate or override the score. If it does not pass before round three, apply the smallest coherent corrections to RUN_DIRECTORY/prototype.html, recapture fresh evidence, and run the next five independent reviews. If this step is re-entered because the downstream prototype quality gate revised prototype.html, use the next unused Jury round; the tool binds each passing decision to the prototype hash. Complete with outcome passed only when DesignJurySubmit reports passed for the current prototype. If all three rounds were consumed before a downstream revision, complete with outcome failed rather than reusing the stale pass or exceeding the cap. After round three, complete with outcome failed and report unresolved findings without claiming completion.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "passed": "prototype-quality-gate",
+              "failed": "cancelled"
+            }
+          }
+        },
+        {
+          "id": "prototype-quality-gate",
+          "description": "Audit and score the rendered prototype",
+          "skills": [
+            "design-refinement"
+          ],
+          "instructions": "Reuse exactly the RUN_DIRECTORY recorded by this route's first step; do not rescan versions, allocate another directory, or write this run's artifacts outside it. Render RUN_DIRECTORY/prototype.html and inspect actual screenshots rather than relying on source review or a claim that the preview opens. For Web, capture representative desktop, tablet, and mobile widths and exercise browser zoom at 75%, 100%, and 125%; for mobile, capture the declared target device plus narrow and wide representative frames. Keep viewport, device-pixel ratio, and zoom metadata with every capture. Apply the design-refinement hard gates and scorecard. Horizontal overflow, clipped or unreachable primary content, accidental fixed-width collapse, content-width utilization below 60%, left/right outer-whitespace asymmetry above 15% of viewport width, or a missing required state is blocking and cannot be averaged away. Score layout/proportion, responsive stability, typography/spacing/color, content density, accessibility, and state coverage; require at least 80/100 overall and at least 60% in every category. Write RUN_DIRECTORY/quality-report.md with screenshot paths, dimensions, zoom, measured or explicitly estimated metrics, category scores, total score, blockers, and the current audit attempt. Complete with outcome passed only when every hard gate and score threshold passes. Otherwise complete with outcome revise and return to html-prototype; after three failed audits, complete with outcome failed and report the remaining defects instead of claiming completion. After a pass, present the finished design and tell the user they can ask to develop the product or request further design adjustments.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "passed": "completed",
+              "revise": "html-prototype",
+              "failed": "cancelled"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "implement-web",
+      "description": "Develop a finished Web design prototype",
+      "steps": [
+        {
+          "id": "prototype-check",
+          "description": "Validate the finished design prototype",
+          "skills": [],
+          "instructions": "Resolve the implementation run directory exactly once. Inspect the user's request for an explicit version token vN where N matches [1-9]\\d*. If one is explicitly requested, set RUN_DIRECTORY strictly to .ohmyagent/design/vN; do not substitute or fall back when that directory is absent. Otherwise inspect only direct child directories of .ohmyagent/design whose complete name matches ^v([1-9]\\d*)$, and select the one with the greatest numeric N. Ignore files, nested directories, v0, leading-zero names, and all other names. If no eligible version exists, the explicitly requested directory does not exist, or RUN_DIRECTORY/prototype.html is absent, empty, or not the requested design, complete with outcome missing; never fall back to an older version, the design root, or another prototype. Read and validate RUN_DIRECTORY/prototype.html, record the exact RUN_DIRECTORY and prototype path as evidence, and do not modify product files in this step.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "implementation",
+              "missing": "cancelled"
+            }
+          }
+        },
+        {
+          "id": "implementation",
+          "description": "Implement the finished design",
+          "skills": [
+            "frontend-design",
+            "web-component-design"
+          ],
+          "instructions": "Reuse exactly the RUN_DIRECTORY resolved and recorded by prototype-check; do not parse the request again, rescan versions, choose another version, or fall back. Implement the validated RUN_DIRECTORY/prototype.html in the Web product. If RUN_DIRECTORY/DESIGN.md is part of the same design run, read it and preserve its visual constraints. Modify product files while preserving unrelated work, existing behavior, and public contracts.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "screenshot-comparison"
+            }
+          }
+        },
+        {
+          "id": "screenshot-comparison",
+          "description": "Audit and score rendered fidelity",
+          "skills": [
+            "design-refinement"
+          ],
+          "instructions": "Reuse exactly the RUN_DIRECTORY resolved and recorded by prototype-check; do not parse the request again, rescan versions, choose another version, or fall back. Run the product and RUN_DIRECTORY/prototype.html, capture both in identical representative frames, and compare actual screenshots. For Web, include desktop, tablet, and mobile widths with browser zoom at 75%, 100%, and 125%; for mobile, include the target device plus narrow and wide representative frames. Record viewport, device-pixel ratio, and zoom. Apply the design-refinement hard gates and scorecard. Horizontal overflow, clipped or unreachable primary content, accidental fixed-width collapse, content-width utilization below 60%, or left/right outer-whitespace asymmetry above 15% of viewport width is blocking. Require at least 80/100 overall and at least 60% in every category. Evidence must include screenshot paths, dimensions, zoom, measured or explicitly estimated metrics, category scores, total score, blockers, and comparison attempt. Complete with outcome passed only when all hard gates and thresholds pass; otherwise complete with outcome revise. After three failed comparisons, complete with outcome failed and report the remaining fidelity gaps instead of claiming success.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "passed": "build-verification",
+              "revise": "refinement-checkpoint",
+              "failed": "cancelled"
+            }
+          }
+        },
+        {
+          "id": "refinement-checkpoint",
+          "description": "Refine from screenshot evidence",
+          "skills": [
+            "design-refinement"
+          ],
+          "instructions": "Reuse exactly the RUN_DIRECTORY resolved and recorded by prototype-check; do not parse the request again, rescan versions, choose another version, or fall back. Correct the blocking and highest-impact fidelity issues from the latest scored comparison, record before/after evidence, and preserve behavior and accessibility. Do not declare the issue fixed from source inspection alone; return to screenshot-comparison for a fresh capture and score in the same frames.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "screenshot-comparison"
+            }
+          }
+        },
+        {
+          "id": "build-verification",
+          "description": "Verify build and tests",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY resolved and recorded by prototype-check; do not parse the request again, rescan versions, choose another version, or fall back. Run the repository real build, test, lint, and typecheck paths that apply; record actual results.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "accessibility-verification"
+            }
+          }
+        },
+        {
+          "id": "accessibility-verification",
+          "description": "Verify accessibility",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY resolved and recorded by prototype-check; do not parse the request again, rescan versions, choose another version, or fall back. Verify keyboard and focus behavior, semantics, labels, contrast, reduced motion, and platform accessibility.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "responsive-verification"
+            }
+          }
+        },
+        {
+          "id": "responsive-verification",
+          "description": "Verify responsive or device layouts",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY resolved and recorded by prototype-check; do not parse the request again, rescan versions, choose another version, or fall back. Verify representative viewport or device sizes, overflow, orientation, and touch targets.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "states-verification"
+            }
+          }
+        },
+        {
+          "id": "states-verification",
+          "description": "Verify interface states",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY resolved and recorded by prototype-check; do not parse the request again, rescan versions, choose another version, or fall back. Verify loading, empty, error, success, disabled, hover, focus, and relevant edge states.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "completed"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "implement-mobile",
+      "description": "Develop a finished mobile or React Native design prototype",
+      "steps": [
+        {
+          "id": "prototype-check",
+          "description": "Validate the finished design prototype",
+          "skills": [],
+          "instructions": "Resolve the implementation run directory exactly once. Inspect the user's request for an explicit version token vN where N matches [1-9]\\d*. If one is explicitly requested, set RUN_DIRECTORY strictly to .ohmyagent/design/vN; do not substitute or fall back when that directory is absent. Otherwise inspect only direct child directories of .ohmyagent/design whose complete name matches ^v([1-9]\\d*)$, and select the one with the greatest numeric N. Ignore files, nested directories, v0, leading-zero names, and all other names. If no eligible version exists, the explicitly requested directory does not exist, or RUN_DIRECTORY/prototype.html is absent, empty, or not the requested design, complete with outcome missing; never fall back to an older version, the design root, or another prototype. Read and validate RUN_DIRECTORY/prototype.html, record the exact RUN_DIRECTORY and prototype path as evidence, and do not modify product files in this step.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "implementation",
+              "missing": "cancelled"
+            }
+          }
+        },
+        {
+          "id": "implementation",
+          "description": "Implement the finished design",
+          "skills": [
+            "react-native-design"
+          ],
+          "instructions": "Reuse exactly the RUN_DIRECTORY resolved and recorded by prototype-check; do not parse the request again, rescan versions, choose another version, or fall back. Implement the validated RUN_DIRECTORY/prototype.html in the React Native/mobile product. If RUN_DIRECTORY/DESIGN.md is part of the same design run, read it and preserve its visual constraints. Modify product files while preserving unrelated work, existing behavior, and public contracts.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "screenshot-comparison"
+            }
+          }
+        },
+        {
+          "id": "screenshot-comparison",
+          "description": "Audit and score rendered fidelity",
+          "skills": [
+            "design-refinement"
+          ],
+          "instructions": "Reuse exactly the RUN_DIRECTORY resolved and recorded by prototype-check; do not parse the request again, rescan versions, choose another version, or fall back. Run the product and RUN_DIRECTORY/prototype.html, capture both in identical representative frames, and compare actual screenshots. For Web, include desktop, tablet, and mobile widths with browser zoom at 75%, 100%, and 125%; for mobile, include the target device plus narrow and wide representative frames. Record viewport, device-pixel ratio, and zoom. Apply the design-refinement hard gates and scorecard. Horizontal overflow, clipped or unreachable primary content, accidental fixed-width collapse, content-width utilization below 60%, or left/right outer-whitespace asymmetry above 15% of viewport width is blocking. Require at least 80/100 overall and at least 60% in every category. Evidence must include screenshot paths, dimensions, zoom, measured or explicitly estimated metrics, category scores, total score, blockers, and comparison attempt. Complete with outcome passed only when all hard gates and thresholds pass; otherwise complete with outcome revise. After three failed comparisons, complete with outcome failed and report the remaining fidelity gaps instead of claiming success.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "passed": "build-verification",
+              "revise": "refinement-checkpoint",
+              "failed": "cancelled"
+            }
+          }
+        },
+        {
+          "id": "refinement-checkpoint",
+          "description": "Refine from screenshot evidence",
+          "skills": [
+            "design-refinement"
+          ],
+          "instructions": "Reuse exactly the RUN_DIRECTORY resolved and recorded by prototype-check; do not parse the request again, rescan versions, choose another version, or fall back. Correct the blocking and highest-impact fidelity issues from the latest scored comparison, record before/after evidence, and preserve behavior and accessibility. Do not declare the issue fixed from source inspection alone; return to screenshot-comparison for a fresh capture and score in the same frames.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "screenshot-comparison"
+            }
+          }
+        },
+        {
+          "id": "build-verification",
+          "description": "Verify build and tests",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY resolved and recorded by prototype-check; do not parse the request again, rescan versions, choose another version, or fall back. Run the repository real build, test, lint, and typecheck paths that apply; record actual results.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "accessibility-verification"
+            }
+          }
+        },
+        {
+          "id": "accessibility-verification",
+          "description": "Verify accessibility",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY resolved and recorded by prototype-check; do not parse the request again, rescan versions, choose another version, or fall back. Verify keyboard and focus behavior, semantics, labels, contrast, reduced motion, and platform accessibility.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "responsive-verification"
+            }
+          }
+        },
+        {
+          "id": "responsive-verification",
+          "description": "Verify responsive or device layouts",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY resolved and recorded by prototype-check; do not parse the request again, rescan versions, choose another version, or fall back. Verify representative viewport or device sizes, overflow, orientation, and touch targets.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "states-verification"
+            }
+          }
+        },
+        {
+          "id": "states-verification",
+          "description": "Verify interface states",
+          "skills": [],
+          "instructions": "Reuse exactly the RUN_DIRECTORY resolved and recorded by prototype-check; do not parse the request again, rescan versions, choose another version, or fall back. Verify loading, empty, error, success, disabled, hover, focus, and relevant edge states.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "completed"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "image-new",
+      "description": "Create a standalone image",
+      "steps": [
+        {
+          "id": "image-generation",
+          "description": "Generate image candidates",
+          "skills": [
+            "image-generation"
+          ],
+          "instructions": "Generate valid image candidates from a clarified brief.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "image-cards"
+            }
+          }
+        },
+        {
+          "id": "image-cards",
+          "description": "Select a generated image",
+          "skills": [],
+          "instructions": "Present valid generated images with DesignSelectCards; do not infer selection.",
+          "write_policy": "product",
+          "transitions": {
+            "tools": [
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "select",
+                "target": "image-verification"
+              },
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "next",
+                "target": "image-cards"
+              },
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "skip",
+                "target": "image-generation"
+              },
+              {
+                "tool": "DesignSelectCards",
+                "field": "action",
+                "equals": "cancel",
+                "target": "cancelled"
+              }
+            ]
+          },
+          "unavailable_target": "image-verification"
+        },
+        {
+          "id": "image-verification",
+          "description": "Verify the selected image",
+          "skills": [],
+          "instructions": "Verify format, dimensions, integrity, and requested content. Evidence must state whether interactive selection occurred; when card selection was unavailable, explicitly record that no interactive selection was performed and identify the actual generated output being returned. Never claim or imply a user selection that did not occur.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "completed"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "image-edit",
+      "description": "Edit or refine an existing image",
+      "steps": [
+        {
+          "id": "image-refinement",
+          "description": "Refine the source image",
+          "skills": [
+            "image-refinement"
+          ],
+          "instructions": "Inspect and edit the supplied image without misrepresenting generated output.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "image-verification"
+            }
+          }
+        },
+        {
+          "id": "image-verification",
+          "description": "Verify the refined image",
+          "skills": [],
+          "instructions": "Verify format, dimensions, integrity, and requested edits.",
+          "write_policy": "product",
+          "transitions": {
+            "manual": {
+              "completed": "completed"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
